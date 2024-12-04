@@ -182,6 +182,74 @@ The `cat` command is used to **display the contents of a file**, **concatenate f
   ```bash
   cat file1.txt file2.txt > combined.txt
   ```
+- **keep entering the data until marked EOF**:
+  ```bash
+  cat > file.txt <<EOF
+> this is first
+> this is second
+> EOF
+```
+In Red Hat Enterprise Linux (RHEL) or other Linux-based systems, the commands `more`, `less`, and `tac` are utilities that help users view and manipulate text content in different ways. Here’s a breakdown of each:
+
+### 1. **`more` Command**
+The `more` command is used to view the contents of a file one screen at a time. It's a simple pager program that allows scrolling through the content, but it doesn't have as many features as `less`.
+
+**Basic Usage:**
+```bash
+more filename
+```
+
+- This will display the contents of `filename` in a paginated manner.
+- You can scroll down by pressing `Space`, scroll up by pressing `b`, and quit by pressing `q`.
+
+**Common Options:**
+- `-n`: Specify the number of lines to display per screen.
+- `+<line_number>`: Start viewing the file from a specific line number.
+
+### 2. **`less` Command**
+The `less` command is a more advanced pager utility compared to `more`. It provides more control over navigation through large files, such as the ability to scroll both forwards and backwards, search within the file, and navigate more intuitively.
+
+**Basic Usage:**
+```bash
+less filename
+```
+
+- You can scroll both up and down through the file using the arrow keys.
+- Press `/` to search for a string, and `n` to go to the next occurrence.
+- Press `q` to quit.
+
+**Common Options:**
+- `-S`: Prevents long lines from wrapping.
+- `-N`: Shows line numbers.
+- `-X`: Disables terminal clearing when exiting.
+
+### 3. **`tac` Command**
+The `tac` command is used to print the contents of a file in reverse order, line by line. The name is "cat" spelled backwards, as it essentially does the opposite of the `cat` command, displaying the file's contents in reverse line order.
+
+**Basic Usage:**
+```bash
+tac filename
+```
+
+- This will display the contents of `filename` starting from the last line to the first.
+
+
+
+### Example Usage:
+1. **Find all printable strings in a binary file:**
+   ```bash
+   strings /bin/ls
+   ```
+
+2. **Find strings of at least 10 characters in a binary file:**
+   ```bash
+   strings -n 10 /path/to/binary
+   ```
+
+3. **Search multiple files for strings:**
+   ```bash
+   strings file1.bin file2.bin
+   ```
 
 ---
 
