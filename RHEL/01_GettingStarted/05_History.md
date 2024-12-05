@@ -173,6 +173,76 @@ There are other related environment variables that help manage Bash history:
 
 - **`HISTFILE`** specifies the file where your command history is stored.
 - **`HISTFILESIZE`** limits the size of the history file by defining the maximum number of commands it can hold.
+### `HISTTIMEFORMAT` in Bash
+
+The **`HISTTIMEFORMAT`** variable in Bash is used to specify a custom time format for timestamps that are added to each command in the shell's history file. This can be particularly useful if you want to track when each command was executed, providing a timestamp alongside each command.
+
+### Purpose of `HISTTIMEFORMAT`:
+By default, Bash history only stores the command itself, without any timestamp. However, if `HISTTIMEFORMAT` is set, Bash will prepend each command with the date and time it was executed. This helps in tracking when specific commands were run.
+
+### Format:
+`HISTTIMEFORMAT` is similar to the `date` command format, so you can use various format specifiers to control how the timestamp is displayed.
+
+### Common Format Specifiers:
+- `%F` – Full date (e.g., `2024-12-05`)
+- `%T` – Time (e.g., `14:45:23`)
+- `%D` – Date in `MM/DD/YY` format
+- `%T` – Time in `HH:MM:SS` format
+- `%n` – Newline
+- `%s` – Seconds since Unix epoch
+
+### Example of `HISTTIMEFORMAT`:
+
+You can set the `HISTTIMEFORMAT` in your shell configuration file (e.g., `.bashrc` or `.bash_profile`) to add timestamps to your command history.
+
+```bash
+# Add timestamps to Bash history
+export HISTTIMEFORMAT="%F %T "
+```
+
+This configuration will display the date and time before each command in the history file, in the format `YYYY-MM-DD HH:MM:SS`. For example:
+
+```
+2024-12-05 14:45:23 ls -l
+2024-12-05 14:45:25 echo "Hello, world!"
+```
+
+### How It Works:
+1. **When you run a command** in the shell, it will be stored in the history with the timestamp.
+2. **The timestamp format** specified in `HISTTIMEFORMAT` will be applied to each command recorded in the history.
+3. **The `history` command** will show the commands along with their timestamps.
+
+### Example Usage:
+
+If you set `HISTTIMEFORMAT` as follows:
+
+```bash
+export HISTTIMEFORMAT="%F %T "
+```
+
+After running a few commands, you can check your history like this:
+
+```bash
+history
+```
+
+The output will look like this (depending on your command execution times):
+
+```
+  1  2024-12-05 14:45:23 ls -l
+  2  2024-12-05 14:45:25 echo "Hello, world!"
+  3  2024-12-05 14:45:30 cat myfile.txt
+```
+
+### Persistent History Configuration:
+
+To make this setting persistent across sessions, you should add the `HISTTIMEFORMAT` definition to your `.bashrc` or `.bash_profile` file:
+
+```bash
+echo 'export HISTTIMEFORMAT="%F %T "' >> ~/.bashrc
+source ~/.bashrc
+```
+
 
 
 ### **Summary of Key Points:**
