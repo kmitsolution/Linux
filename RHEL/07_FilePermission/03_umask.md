@@ -36,7 +36,82 @@ umask [value]
   - For **directories**: `777 - 0777 = 000` (no permissions at all).
 
 ---
+### **`umask -S` Command**
 
+The **`umask -S`** command is used to display the current **user file creation mask** in symbolic format, rather than the default numeric (octal) format.
+
+### **Syntax**:
+```bash
+umask -S
+```
+
+### **What does `umask -S` do?**
+- The **`umask`** command, when used without any options, shows the current **umask value** in **octal** format (e.g., `022`).
+- The **`umask -S`** option shows the **umask** in **symbolic format** (e.g., `u=rwx,g=rx,o=rx`), which is easier to understand because it shows the permissions that are being **masked out**.
+
+### **Understanding Symbolic Format**:
+In symbolic format, the **umask** will display which permissions are being **removed** from the default maximum permissions:
+- **`r`**: Read
+- **`w`**: Write
+- **`x`**: Execute
+- **`u`**: User (owner)
+- **`g`**: Group
+- **`o`**: Others
+
+### **Example of `umask -S`**:
+
+#### Example 1: Default umask (022)
+
+1. **Check the umask**:
+   ```bash
+   umask -S
+   ```
+
+   Output:
+   ```
+   u=rwx,g=rx,o=rx
+   ```
+
+   This means:
+   - The **user** (owner) has **read**, **write**, and **execute** permissions.
+   - The **group** and **others** have **read** and **execute** permissions.
+   - This is equivalent to a numeric umask value of `022`, which subtracts **write** permission from group and others.
+
+#### Example 2: Custom umask (027)
+
+1. **Set a custom umask**:
+   ```bash
+   umask 027
+   ```
+
+2. **Check the umask**:
+   ```bash
+   umask -S
+   ```
+
+   Output:
+   ```
+   u=rwx,g=rx,o=
+   ```
+
+   This means:
+   - The **user** (owner) has **read**, **write**, and **execute** permissions.
+   - The **group** has **read** and **execute** permissions.
+   - **Others** have **no** permissions at all.
+   - The numeric equivalent of this `umask` is `027`, which removes **write** permission from the group and **read**, **write**, and **execute** permissions from others.
+
+### **Key Points**:
+- The **symbolic format** (`umask -S`) shows the permissions that will **not be set** when a new file or directory is created.
+- By default, **files** are created with `666` permissions (`rw-rw-rw-`), and **directories** with `777` permissions (`rwxrwxrwx`).
+- The **umask** value reduces the permissions by "masking out" certain bits.
+  
+### **Summary of Example Outputs**:
+- **`umask -S` with `umask 022`**:
+  - Output: `u=rwx,g=rx,o=rx`
+  - Numeric Equivalent: `022`
+- **`umask -S` with `umask 027`**:
+  - Output: `u=rwx,g=rx,o=`
+  - Numeric Equivalent: `027`
 ### **2. Directory Execute Permission**
 
 In Linux, **directories require the execute (`x`) permission** in order to allow users to **enter** or **navigate** into them.
