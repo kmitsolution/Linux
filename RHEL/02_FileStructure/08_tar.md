@@ -151,6 +151,142 @@ tar [options] [archive-file] [file or directory to be archived]
 | `-p`       | Preserve file permissions during extraction                                | `tar -xpvf archive.tar`                      |
 | `-z`       | Decompress `.tar.gz` files automatically during extraction                  | `tar -xzvf archive.tar.gz`                   |
 
+To install Apache Maven on a RHEL-based system like CentOS, Fedora, or RHEL 9, follow these steps. This method involves downloading the binary, extracting it, and configuring the system to recognize Maven as a command-line tool.
+
+### **Steps to Install Apache Maven:**
+
+#### **1. Install Java Development Kit (JDK)**
+Apache Maven requires Java to be installed on your system. You can install **OpenJDK** (e.g., Java 17) using the following commands:
+
+```bash
+# List available openjdk versions
+yum list available | grep openjdk
+
+# Install Java 17 (OpenJDK)
+sudo yum install java-17-openjdk
+```
+
+- You can check if Java is installed properly by running:
+  
+  ```bash
+  java -version
+  ```
+
+#### **2. Download Apache Maven**
+Next, you need to download the Apache Maven binary from the official site. In your example, the command used is:
+
+```bash
+# Download Apache Maven binary tar.gz file
+wget https://dlcdn.apache.org/maven/maven-3/3.8.8/binaries/apache-maven-3.8.8-bin.tar.gz
+```
+
+#### **3. Extract the Maven Archive**
+After the download is complete, extract the `tar.gz` file:
+
+```bash
+# Extract the tar.gz archive
+tar -xzvf apache-maven-3.8.8-bin.tar.gz
+```
+
+#### **4. Move to the Extracted Directory**
+Change into the directory where Apache Maven was extracted.
+
+```bash
+cd apache-maven-3.8.8
+```
+
+#### **5. Verify Maven Installation**
+You can check if Maven is installed correctly by running:
+
+```bash
+# Navigate to the `bin` directory of the extracted Maven folder
+cd bin/
+
+# Check Maven version to verify the installation
+mvn --version
+```
+
+If Maven is installed correctly, the output should display the version information for Apache Maven.
+
+#### **6. Set Maven in System PATH**
+To make Maven available globally, you need to add Maven's `bin` directory to the system's `PATH` environment variable.
+
+- Open the `.bash_profile` or `.bashrc` file to edit:
+
+```bash
+nano ~/.bash_profile
+```
+
+- Add the following line at the end of the file to add Maven to your system's `PATH`:
+
+```bash
+export PATH=$PATH:/home/ec2-user/apache-maven-3.8.8/bin
+```
+
+- Save and close the file.
+
+- To make the changes take effect, source the profile file:
+
+```bash
+source ~/.bash_profile
+```
+
+#### **7. Verify Maven Installation Again**
+Now that Maven is added to the system `PATH`, verify the installation:
+
+```bash
+mvn --version
+```
+
+You should see the Maven version and other relevant information.
+
+#### **8. Optional: Clean up the Download**
+Once Maven is installed and configured, you can delete the downloaded archive and extracted files to save space:
+
+```bash
+# Remove the tar.gz file
+rm apache-maven-3.8.8-bin.tar.gz
+
+# Remove the extracted directory (if you no longer need it)
+rm -rf apache-maven-3.8.8
+```
+
+---
+
+### **Summary of Commands:**
+
+1. **Install Java (OpenJDK 17)**:
+   ```bash
+   yum install java-17-openjdk
+   ```
+
+2. **Download Apache Maven**:
+   ```bash
+   wget https://dlcdn.apache.org/maven/maven-3/3.8.8/binaries/apache-maven-3.8.8-bin.tar.gz
+   ```
+
+3. **Extract the tar.gz file**:
+   ```bash
+   tar -xzvf apache-maven-3.8.8-bin.tar.gz
+   ```
+
+4. **Move to the extracted directory and check Maven version**:
+   ```bash
+   cd apache-maven-3.8.8/bin
+   mvn --version
+   ```
+
+5. **Update the PATH variable**:
+   Add `export PATH=$PATH:/home/ec2-user/apache-maven-3.8.8/bin` to `~/.bash_profile` or `~/.bashrc`.
+
+6. **Verify Maven installation**:
+   ```bash
+   mvn --version
+   ```
+
+---
+
+This will install Apache Maven on your RHEL system and make it accessible from anywhere on the command line by adding it to the `PATH`.
 ### **Use Cases for `tar`:**
 1. **Backup and restore**: `tar` is commonly used to create backups of directories and files, which can then be easily restored or transferred.
 2. **Transfer multiple files as a single unit**: When sending multiple files over a network, it's easier to transfer a single `.tar` archive than a large number of individual files.
