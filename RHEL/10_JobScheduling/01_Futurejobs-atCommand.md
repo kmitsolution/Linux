@@ -221,6 +221,10 @@ at 10:00 AM 1
 This will run the job at 10:00 AM on the 1st of the current month.
 
 ---
+```bash
+   echo test > /dev/pts/1 | at now + 1 min
+   at 09:15PM -f /tmp/script.sh > /dev/pts/1
+```
 
 ### **8. Viewing and Managing `at` Jobs in Logs**
 
@@ -233,6 +237,147 @@ tail /var/log/cron
 This shows logs of cron jobs and scheduled `at` jobs.
 
 ---
+### **Additional Options for the `at` Command**
+
+In addition to the basic usage of the `at` command, there are a few other important options that provide more control over job management, job contents, and job queues. Let's explore these options:
+
+---
+
+### **1. `at -q` Command**
+The `at -q` option allows you to specify the **queue** in which the job will be placed. In Linux, `at` uses different queues to manage the execution of scheduled jobs. Each queue can have a different priority level, and jobs are executed in the order they are scheduled within each queue.
+
+By default, `at` jobs are scheduled in the "a" queue, but you can specify a different queue if necessary.
+
+#### **Syntax of `at -q`**:
+```bash
+at -q [queue] [time]
+```
+
+- **[queue]**: The queue to which you want to assign the job. The queue name can be any lowercase letter (a-z), and each letter represents a priority level.
+- **[time]**: The time at which the job is to be executed.
+
+#### **Example:**
+To schedule a job at 5:00 PM today, but place it in queue `b`:
+
+```bash
+at -q b 5:00 PM
+```
+
+This job will be placed in the "b" queue and executed at 5:00 PM. If the "a" queue is already busy, the "b" queue may be processed next, depending on its priority configuration.
+
+To see the current list of job queues, you can use the `atq` command.
+
+---
+
+### **2. `at -c` Command**
+
+The `at -c` option allows you to **view the contents of a scheduled `at` job** by specifying the job ID. This command shows the commands that are scheduled to run when the job is executed.
+
+#### **Syntax of `at -c`**:
+```bash
+at -c [job_id]
+```
+
+- **[job_id]**: The ID of the job that you want to view. You can get the job ID from the `atq` command.
+
+#### **Example:**
+To view the contents of job ID 1:
+
+```bash
+at -c 1
+```
+
+This will display the contents of the job with ID 1, showing the command(s) that are set to be executed.
+
+---
+
+### **3. `/var/spool/at` Directory**
+
+The `/var/spool/at` directory is where the system stores the **queued jobs** that are scheduled with the `at` command. The jobs are stored in files inside this directory and are executed by the `atd` daemon. Each file in this directory corresponds to a pending job.
+
+#### **Important Files in `/var/spool/at`**:
+
+- **Pending jobs**: The jobs are stored as files with filenames corresponding to job IDs.
+- **Job files**: These files contain the actual job (command) to be executed, along with scheduling information.
+
+You can view the files in the `/var/spool/at` directory using the `ls` command:
+
+```bash
+ls /var/spool/at
+```
+
+To inspect the contents of a specific job file, you can open it using a text editor or the `cat` command:
+
+```bash
+cat /var/spool/at/job_id
+```
+
+Each file in `/var/spool/at` represents a scheduled job. However, it’s worth noting that you should avoid manually editing these files unless you know what you are doing, as it may disrupt the job execution.
+
+---
+
+### **4. Changing Commands in `at` Jobs**
+
+Once an `at` job is scheduled, it is not designed for editing directly through the `at` command. If you need to change a scheduled job, the best approach is to **remove the current job** and **recreate it** with the new command or schedule.
+
+To modify an existing job:
+
+1. **List all scheduled jobs** using the `atq` command.
+   
+   ```bash
+   atq
+   ```
+
+2. **Remove the existing job** using `atrm` and the job ID:
+   
+   ```bash
+   atrm [job_id]
+   ```
+
+3. **Recreate the job** with the new command or schedule using `at`.
+
+   ```bash
+   at [new_time]
+   ```
+
+### **Examples of Using `at -q` and `at -c`**
+
+#### **1. Using `at -q` to specify a queue**
+
+To schedule a job to run at 10:00 PM today and place it in queue `c`, run:
+
+```bash
+at -q c 10:00 PM
+```
+
+This job will be added to queue `c` and will execute at 10:00 PM, depending on the priority of the queues.
+
+#### **2. Using `at -c` to view the contents of a job**
+
+Let's say you have a job with ID `3` that you want to inspect. To view its contents, run:
+
+```bash
+at -c 3
+```
+
+This will display the commands associated with job ID `3`, showing you exactly what is scheduled to run.
+
+---
+
+### **Summary of Commands**
+
+1. **`at -q`**: Specify the queue for scheduling a job.
+   - Example: `at -q b 5:00 PM`
+   
+2. **`at -c`**: View the contents of a scheduled job.
+   - Example: `at -c 3`
+
+3. **`/var/spool/at`**: Directory where `at` jobs are stored.
+   - You can inspect jobs in this directory by listing or viewing specific job files.
+   
+4. **Changing a scheduled `at` job**: Remove the old job with `atrm` and reschedule it with the new command.
+
+This should give you a deeper understanding of how to use `at` for scheduling tasks, specifying job queues, viewing job contents, and managing scheduled tasks in Linux.
 
 ### **Summary of Important `at` Commands**
 
