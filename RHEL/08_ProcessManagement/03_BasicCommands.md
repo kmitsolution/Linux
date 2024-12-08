@@ -105,6 +105,93 @@ This lists the PIDs of all `bash` processes along with their associated TTY (ter
   ```
   This filters and shows processes in the "Zombie" state (represented by `Z`).
 
+The `ps` command is used to display information about processes running on a system. The `-f` and `-ef` options modify the output to display different levels of detail. Let's break down both of these options:
+
+### 1. `ps -f` (Full format)
+The `-f` option stands for **"full format"**. It provides more detailed information about each process compared to the default `ps` output.
+
+#### Example:
+```bash
+ps -f
+```
+
+#### Output:
+```
+UID        PID  PPID  C STIME TTY          TIME CMD
+root         1     0  0 Dec08 ?        00:00:03 /sbin/init
+user      1234   567  0 10:15 pts/0    00:00:01 bash
+user      5678  1234  0 10:16 pts/0    00:00:00 ps -f
+```
+
+#### Explanation of Columns:
+- **UID**: User ID of the process owner.
+- **PID**: Process ID.
+- **PPID**: Parent Process ID (the ID of the process that spawned this one).
+- **C**: CPU utilization.
+- **STIME**: Start time of the process.
+- **TTY**: The terminal associated with the process (or `?` for processes not associated with a terminal).
+- **TIME**: Total CPU time used by the process.
+- **CMD**: The command that started the process.
+
+This format provides more detailed process information compared to the default `ps` command.
+
+---
+
+### 2. `ps -ef` (Extended format)
+The `-e` option means **"show all processes"**, and `-f` means **"full format"**. Together, `ps -ef` shows detailed information about all processes running on the system.
+
+#### Example:
+```bash
+ps -ef
+```
+
+#### Output:
+```
+UID        PID  PPID  C STIME TTY      STAT   TIME    COMMAND
+root         1     0  0 Dec08 ?        Ss     00:00:03 /sbin/init
+user      1234   567  0 10:15 pts/0    S      00:00:01 bash
+user      5678  1234  0 10:16 pts/0    S      00:00:00 ps -ef
+```
+
+#### Explanation of Columns:
+- **UID**: User ID of the process owner.
+- **PID**: Process ID.
+- **PPID**: Parent Process ID.
+- **C**: CPU utilization.
+- **STIME**: Start time of the process.
+- **TTY**: The terminal associated with the process.
+- **STAT**: Process status (e.g., `S` for sleeping, `R` for running, `Z` for zombie).
+- **TIME**: Total CPU time used by the process.
+- **COMMAND**: The full command line that started the process.
+
+### Key Differences Between `ps -f` and `ps -ef`:
+- **`ps -f`**: Displays a **full-format** output, but only for the processes associated with the current user and the terminal session.
+- **`ps -ef`**: Displays a **full-format** output for **all processes** running on the system, including those owned by other users and those not associated with any terminal.
+
+### Common Use Cases:
+- **`ps -f`**: Useful for getting a detailed view of processes running within your terminal or user session.
+- **`ps -ef`**: Useful for getting a system-wide view of all processes running on the machine, often used for system monitoring or troubleshooting.
+
+---
+
+### Example Commands for Process Management:
+- **To find a specific process**: You can combine `ps -ef` with `grep` to search for a specific process by name.
+  ```bash
+  ps -ef | grep sshd
+  ```
+  This will show all `sshd` processes running on the system.
+
+- **To see processes running by a specific user**: Use the `-u` flag with `ps`.
+  ```bash
+  ps -ef -u username
+  ```
+
+In summary:
+- **`ps -f`**: Displays detailed information about the processes for the current user and terminal.
+- **`ps -ef`**: Displays detailed information about all processes running on the system, regardless of the user or terminal.
+
+  
+
 ### Summary:
 - `pgrep sshd`: Find PIDs of processes with the name `sshd`.
 - `pstree`: View the process tree.
