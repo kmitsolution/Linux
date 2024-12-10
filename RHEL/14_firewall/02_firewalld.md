@@ -67,37 +67,3 @@ sudo firewall-cmd --state
 ```
 This will return either `running` or `not running`, depending on the state of the `firewalld` service.
 
-### Managing `firewalld` with `firewall-cmd`
-
-`firewall-cmd` is the command-line tool used to interact with `firewalld`. Some basic commands to configure `firewalld`:
-
-- **List available zones**:
-  ```bash
-  sudo firewall-cmd --list-all-zones
-  ```
-
-- **Check the current active zone**:
-  ```bash
-  sudo firewall-cmd --get-active-zones
-  ```
-
-- **Allow a service (e.g., HTTP) in the default zone**:
-  ```bash
-  sudo firewall-cmd --zone=public --add-service=http --permanent
-  sudo firewall-cmd --reload
-  ```
-
-- **Remove a service (e.g., HTTP) from the zone**:
-  ```bash
-  sudo firewall-cmd --zone=public --remove-service=http --permanent
-  sudo firewall-cmd --reload
-  ```
-
-- **To check open ports**:
-  ```bash
-  sudo firewall-cmd --list-ports
-  ```
-
-### Conclusion
-
-`firewalld` in RHEL provides a flexible way to manage your firewall configurations. You can install it, start or stop the service, and enable or disable it at boot time using `systemctl`. Once running, you can configure the firewall rules using the `firewall-cmd` tool.
