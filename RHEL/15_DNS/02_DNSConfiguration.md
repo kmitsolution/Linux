@@ -16,7 +16,14 @@ It seems like you're setting up a DNS server on a **Red Hat Enterprise Linux (RH
    - `listen-on port 53 { 127.0.0.1; 192.168.2.139; };`  
      This tells BIND to listen for DNS queries on both the localhost (`127.0.0.1`) and the server's IP address (`192.168.2.139`) on port 53, which is the default DNS port.
 
-   - `zone "welcome.com" IN { ... };`  
+   - `zone`
+     ```
+     zone "welcome.com" IN {
+        type master;
+        file "welcome.com.fzone";
+        allow-query { any; };
+};
+```
      This defines a zone for the domain `welcome.com`, specifying that this server is the **master** for the zone, and the records will be stored in the `welcome.com.fzone` file.
 
 3. **Check for Errors in `named.conf`**:
@@ -28,25 +35,57 @@ It seems like you're setting up a DNS server on a **Red Hat Enterprise Linux (RH
 4. **Configure Zone File**:
    ```bash
    cd /var/named/
-   vi welcome.com.fzone
+   
    ```
+ **welcome.com.fzone**
+```
+; base zone file for example.com
+$TTL 2d    ; default TTL for zone
+; Start of Authority RR defining the key characteristics of the zone (domain)
+@         IN      SOA   ns1.example.com. hostmaster.example.com. (
+                                800        ; serial number
+                                12h        ; refresh
+                                15m        ; update retry
+                                3w         ; expiry
+                                2h         ; minimum
+                                )
+; name server RR for the domain
+           IN      NS      ns1.example.com.
+
+www        IN      A       192.168.2.139
+```
+   <a href=https://bind9.readthedocs.io/en/v9.18.14/chapter3.html> Bind Zone Configuration Reference </a>
+   
    You're creating a zone file `welcome.com.fzone` that contains DNS resource records (RRs) for the domain `welcome.com`. The content of the file looks like this:
    - The `$TTL` directive sets the default time-to-live (TTL) for the zone.
    - The `SOA` (Start of Authority) record defines the zone’s authority information, including the primary nameserver and the email address of the zone administrator (hostmaster).
    - The `NS` record specifies the nameserver for the domain.
    - The `A` record maps the domain `www.welcome.com` to the IP address `192.168.2.139`.
 
-5. **Check the Zone File**:
+6. **Check the Zone File**:
    ```bash
    named-checkzone welcome.com welcome.com.fzone
    ```
    This command checks for errors in the `welcome.com.fzone` zone file, ensuring that the syntax and record structure are correct.
 
-6. **View the Zone File**:
+7. **View the Zone File**:
    ```bash
    cat welcome.com.fzone
    ```
    This command displays the contents of the `welcome.com.fzone` file. You should see your DNS resource records listed there.
+8. **Update /etc/resolve.conf File**
+   Add dns server ip in the nameserver
+   ```
+   search localdomain
+   #nameserver 192.168.2.2
+   nameserver 192.168.2.139
+
+   ```
+9. **Verify**
+    ```
+    nslookup www.welcome.com
+    curl www.welcome.com
+    ```
 
 ### Potential Issues and Additional Steps
 
