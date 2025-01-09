@@ -30,7 +30,7 @@ Here’s a breakdown of what you can do and some important commands related to f
 - **GFS**: The **Global File System (GFS)** is used for **clustered environments** where multiple nodes can access the same file system concurrently. It’s commonly used in high-availability and high-performance systems.
 
 ### Creating and Managing File Systems:
-- **Creating file systems**: You can use tools like `mkfs` to create file systems on partitions or devices. Examples:
+- **Creating file systems**: You can use tools like `mkfs` (ls /sbin/mk*)to create file systems on partitions or devices. Examples:
    - `mkfs.ext2` for ext2 file system.
    - `mkfs.ext4` for ext4 file system.
    - `mkfs.xfs` for XFS file system.
