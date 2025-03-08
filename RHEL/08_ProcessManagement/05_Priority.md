@@ -107,31 +107,6 @@ renice -n 5 -u username
 
 
 
-#### **3.3 Setting Real-Time Priority**
-The `chrt` command in Linux is used to manipulate the real-time scheduling attributes of a process. This command allows you to **set or get the real-time priority** and **scheduling policy** of a running process or a new process. Real-time processes are given higher priority than normal processes, which is useful for tasks that are time-sensitive (e.g., audio processing or system control tasks).
-
-### **Syntax of `chrt` Command:**
-```bash
-chrt [options] <priority> <command> [args...]
-```
-
-- **`<priority>`**: The real-time priority value (between 1 and 99, where 99 is the highest priority).
-- **`<command>`**: The command to run the process with the specified scheduling policy and priority.
-- **`[args...]`**: Arguments for the command, if applicable.
-
-
-### **Real-Time Scheduling Policies in `chrt`:**
-The `chrt` command allows you to select between two main real-time scheduling policies:
-1. **`SCHED_FIFO` (First-In-First-Out)**: Processes are scheduled in a simple first-come, first-served manner, and once a process starts running, it runs to completion unless it voluntarily gives up the CPU.
-2. **`SCHED_RR` (Round-Robin)**: Similar to `SCHED_FIFO`, but it allows processes to get a time slice to run. After a time slice is over, the process is re-queued, and another process gets a chance to run.
-
-By default, most processes are scheduled using the **SCHED_OTHER** policy, which is the default time-sharing policy for non-real-time tasks.
-
-### **Options for the `chrt` Command:**
-- **`-f`**: Specifies **FIFO scheduling policy**.
-- **`-r`**: Specifies **Round-Robin scheduling policy**.
-- **`-p`**: Specifies that you want to **set the priority of an existing process** by providing its **PID** (Process ID).
-- **`-v`**: Enables verbose mode, showing more detailed output.
 To create documentation for monitoring the changes made by adjusting the `nice` value, and how the `top` command can be used to observe those changes, follow these steps:
 
 ### Steps:
@@ -313,7 +288,32 @@ renice -n 10 1234  # Lower priority (higher niceness)
 - The `top` command provides real-time monitoring of processes and resource usage, where changes in niceness should affect the process's CPU allocation.
 ```
 
-Let me know if you need more details or any further adjustments!
+#### **3.3 Setting Real-Time Priority**
+The `chrt` command in Linux is used to manipulate the real-time scheduling attributes of a process. This command allows you to **set or get the real-time priority** and **scheduling policy** of a running process or a new process. Real-time processes are given higher priority than normal processes, which is useful for tasks that are time-sensitive (e.g., audio processing or system control tasks).
+
+### **Syntax of `chrt` Command:**
+```bash
+chrt [options] <priority> <command> [args...]
+```
+
+- **`<priority>`**: The real-time priority value (between 1 and 99, where 99 is the highest priority).
+- **`<command>`**: The command to run the process with the specified scheduling policy and priority.
+- **`[args...]`**: Arguments for the command, if applicable.
+
+
+### **Real-Time Scheduling Policies in `chrt`:**
+The `chrt` command allows you to select between two main real-time scheduling policies:
+1. **`SCHED_FIFO` (First-In-First-Out)**: Processes are scheduled in a simple first-come, first-served manner, and once a process starts running, it runs to completion unless it voluntarily gives up the CPU.
+2. **`SCHED_RR` (Round-Robin)**: Similar to `SCHED_FIFO`, but it allows processes to get a time slice to run. After a time slice is over, the process is re-queued, and another process gets a chance to run.
+
+By default, most processes are scheduled using the **SCHED_OTHER** policy, which is the default time-sharing policy for non-real-time tasks.
+
+### **Options for the `chrt` Command:**
+- **`-f`**: Specifies **FIFO scheduling policy**.
+- **`-r`**: Specifies **Round-Robin scheduling policy**.
+- **`-p`**: Specifies that you want to **set the priority of an existing process** by providing its **PID** (Process ID).
+- **`-v`**: Enables verbose mode, showing more detailed output.
+
 
 ### **1. Set the Real-Time Priority of a New Process:**
 ```bash
