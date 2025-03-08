@@ -105,6 +105,8 @@ If you want to change the priority of a process owned by another user (as a root
 renice -n 5 -u username
 ```
 
+
+
 #### **3.3 Setting Real-Time Priority**
 The `chrt` command in Linux is used to manipulate the real-time scheduling attributes of a process. This command allows you to **set or get the real-time priority** and **scheduling policy** of a running process or a new process. Real-time processes are given higher priority than normal processes, which is useful for tasks that are time-sensitive (e.g., audio processing or system control tasks).
 
@@ -116,6 +118,7 @@ chrt [options] <priority> <command> [args...]
 - **`<priority>`**: The real-time priority value (between 1 and 99, where 99 is the highest priority).
 - **`<command>`**: The command to run the process with the specified scheduling policy and priority.
 - **`[args...]`**: Arguments for the command, if applicable.
+
 
 ### **Real-Time Scheduling Policies in `chrt`:**
 The `chrt` command allows you to select between two main real-time scheduling policies:
@@ -129,6 +132,188 @@ By default, most processes are scheduled using the **SCHED_OTHER** policy, which
 - **`-r`**: Specifies **Round-Robin scheduling policy**.
 - **`-p`**: Specifies that you want to **set the priority of an existing process** by providing its **PID** (Process ID).
 - **`-v`**: Enables verbose mode, showing more detailed output.
+To create documentation for monitoring the changes made by adjusting the `nice` value, and how the `top` command can be used to observe those changes, follow these steps:
+
+### Steps:
+
+1. **Overview of the script**:  
+   You have a script (`infinite.sh`) that runs an infinite loop. You run it in the background, using the `nice` command to adjust its priority (the "niceness") and the `renice` command to change the priority of running processes.
+
+2. **Description of `nice` and `renice`**:  
+   - The `nice` command sets the **niceness** of a process when it's launched. A **lower value** (more negative) means higher priority, and a **higher value** (more positive) means lower priority.
+   - The `renice` command is used to change the priority of an already-running process.
+
+3. **How to monitor changes**:  
+   You use the `top` command to monitor the resource usage (like CPU usage) of the process after changing its `nice` value. This allows you to see the effect of the priority adjustment.
+
+### Documentation:
+
+#### 1. **Initial Setup**:
+   - Create a simple script that runs infinitely in the background using a `for` loop.
+
+```bash
+#!/bin/bash
+# Infinite for loop
+for (( ; ; ))
+do
+    continue
+done
+```
+
+#### 2. **Running the script**:
+   - To run the script in the background, use the following command:
+
+```bash
+sh infinite.sh &
+```
+
+   - This will start the script in the background.
+
+#### 3. **Changing the Priority (Niceness)**:
+   - Use the `nice` command to start a process with a specific niceness.
+   - Use the `renice` command to modify the niceness of an already running process.
+
+##### Example:
+
+1. **Launching with `nice`**:
+   ```bash
+   nice -n -5 sh infinite.sh &
+   ```
+
+   This launches the script with a niceness of `-5`, which gives it a higher priority (compared to the default niceness of 0).
+
+2. **Renicing a process**:
+   - Find the PID (Process ID) of the running script using the `ps` or `jobs` command.
+   
+     For example:
+     ```bash
+     jobs  # Shows job IDs and associated PIDs
+     ```
+   
+   - Change the niceness of a running process using `renice`:
+   
+     ```bash
+     renice -n -10 <pid>  # Example: Give a higher priority to the process
+     ```
+
+#### 4. **Monitoring Changes with `top`**:
+
+   After adjusting the `nice` value, you can use the `top` command to monitor the system's resource usage and see how your process behaves under different niceness values.
+
+   - **Start `top`**:
+     ```bash
+     top
+     ```
+
+   - In the `top` display, you'll see columns like `PID`, `USER`, `%CPU`, `%MEM`, etc. Pay particular attention to the **%CPU** column, which indicates how much CPU the process is using. A higher priority process (with a more negative nice value) should get more CPU time if the system is busy.
+
+   - To filter or search for the process, you can press `Shift + L` and type the **PID** or the **name of the process** (if you know it) to narrow the results.
+
+#### 5. **Example Workflow**:
+   
+1. **Start the script**:
+
+```bash
+sh infinite.sh &
+```
+
+2. **Check jobs**:
+
+```bash
+jobs
+```
+
+   - You'll see the job number and process ID (PID) of your running script.
+
+3. **Change niceness using `renice`**:
+
+   For example, if the process ID (PID) is `1234`, you could do:
+
+```bash
+renice -n -10 1234
+```
+
+   - This gives the process higher priority (lower niceness).
+
+4. **Monitor with `top`**:
+
+   ```bash
+   top
+   ```
+
+   - Look at the **%CPU** column to observe how the process's CPU usage changes after altering the niceness.
+   - Press `Shift + P` to sort by CPU usage, and you should see the `infinite.sh` script (or any other process) listed with its CPU usage.
+
+5. **Adjust again** if needed using `renice`:
+
+```bash
+renice -n 10 1234  # Lower priority (higher niceness)
+```
+
+#### 6. **Killing the Processes**:
+   - If you want to kill the running processes, you can use the `kill` command:
+   
+   ```bash
+   kill -9 <pid>  # Example: kill the process with PID 1234
+   ```
+
+   You can find the PID using `ps` or `jobs`.
+
+## Example
+
+
+1. **Create and Run Infinite Loop**:
+   - Create a script (`infinite.sh`) containing an infinite loop:
+     ```bash
+     #!/bin/bash
+     for (( ; ; ))
+     do
+         continue
+     done
+     ```
+
+   - Start the script in the background:
+     ```bash
+     sh infinite.sh &
+     
+     ```
+  Note down the process id and check in the top command and you will see cpu utitlization is high for this process
+2. **Change Niceness (Priority)**:
+   - You can start the script with a specific niceness using `nice`:
+     ```bash
+     nice -n -5 sh infinite.sh &
+     ```
+
+   - To change the niceness of an already running process, use `renice`:
+     ```bash
+     renice -n -10 <pid>  # Give the process higher priority
+     renice -n 10 <pid>   # Give the process lower priority
+     ```
+
+3. **Monitor Process with `top`**:
+   - Run `top` to monitor system resources:
+     ```bash
+     top
+     ```
+
+   - Look at the `%CPU` column to see how much CPU the process is using. You can also use the `Shift + P` key combination to sort processes by CPU usage.
+
+4. **Adjust Niceness as Needed**:
+   - You can continue adjusting the niceness and monitor the impact on the CPU usage in real-time using `top`.
+
+5. **Killing Processes**:
+   - When finished, you can terminate the process using `kill`:
+     ```bash
+     kill -9 <pid>
+     ```
+
+## Notes
+- The `nice` command is used when starting a process to set its initial priority.
+- The `renice` command adjusts the priority of a running process.
+- The `top` command provides real-time monitoring of processes and resource usage, where changes in niceness should affect the process's CPU allocation.
+```
+
+Let me know if you need more details or any further adjustments!
 
 ### **1. Set the Real-Time Priority of a New Process:**
 ```bash
