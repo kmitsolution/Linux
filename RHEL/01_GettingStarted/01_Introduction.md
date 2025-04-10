@@ -68,7 +68,7 @@ Red Hat has been one of the most significant contributors to the **Linux ecosyst
 
 ### **Acquisition by IBM (2019)**
 
-In **2019**, IBM acquired Red Hat for **$34 billion**, one of the largest tech acquisitions at the time. This acquisition has further solidified Red Hat’s position as a leader in the enterprise software space, particularly in **hybrid cloud** and **open-source technologies**. However, Red Hat continues to operate as an independent unit under IBM, preserving its culture and open-source ethos.
+In **2019**, IBM acquired Red Hat , one of the largest tech acquisitions at the time. This acquisition has further solidified Red Hat’s position as a leader in the enterprise software space, particularly in **hybrid cloud** and **open-source technologies**. However, Red Hat continues to operate as an independent unit under IBM, preserving its culture and open-source ethos.
 
 ### **Red Hat’s Impact on the Tech Industry**
 
