@@ -27,61 +27,57 @@ In Linux, the file system is organized in a hierarchical structure known as the 
 
 ### **7. `/lib` (Libraries)**
    - **Purpose**: Contains essential shared libraries that are required by the binaries in `/bin` and `/sbin` to run.
-   - **Examples**: `/lib/x86_64-linux-gnu/` (architecture-specific libraries), `/lib/libc.so.6` (C library).
+   - **Examples**: `/lib/os_release` (os related ), `/lib/python` (python library).
 
-### **8. `/libexec` (Executable Programs for System Use)**
-   - **Purpose**: Contains programs that are used by system services and other applications, but are not intended to be directly invoked by users.
-   - **Examples**: `crond` (cron daemon), `systemd` executables.
-
-### **9. `/media` (Removable Media)**
+### **8. `/media` (Removable Media)**
    - **Purpose**: Temporary mount point for removable devices like CDs, DVDs, USB drives, and other external media.
    - **Examples**: `/media/cdrom/`, `/media/usb/`.
 
-### **10. `/mnt` (Temporary Mount Points)**
+### **9. `/mnt` (Temporary Mount Points)**
    - **Purpose**: Traditionally used for temporarily mounting file systems or devices by system administrators.
    - **Examples**: `/mnt/data/` (mount point for additional data drives).
    - **Note**: Often used for manual mounts of devices or partitions.
 
-### **11. `/opt` (Optional Software Packages)**
+### **10. `/opt` (Optional Software Packages)**
    - **Purpose**: Used for installing third-party or optional software packages that are not part of the standard system distribution.
    - **Examples**: `/opt/google/` (Google software), `/opt/lampp/` (XAMPP web server package).
 
-### **12. `/proc` (Process Information)**
+### **11. `/proc` (Process Information)**
    - **Purpose**: A virtual filesystem that provides information about running processes and system parameters. It does not contain actual files, but provides a view of kernel and process data.
    - **Examples**: `/proc/cpuinfo` (CPU information), `/proc/meminfo` (memory usage), `/proc/1/status` (status of process 1, usually `init`).
 
-### **13. `/root` (Root User's Home Directory)**
+### **12. `/root` (Root User's Home Directory)**
    - **Purpose**: The home directory for the root (superuser) account.
    - **Examples**: `/root/`.
 
-### **14. `/run` (Runtime Variable Data)**
+### **13. `/run` (Runtime Variable Data)**
    - **Purpose**: A temporary filesystem that stores information about the system's runtime status, such as PID files and system information that is required before the `/var` directory is available.
-   - **Examples**: `/run/lock/` (lock files), `/run/user/` (user runtime data).
+   - **Examples**: `/run/lock/` (lock files), `/run/user/` (user runtime data like how many users are logged in currently).
 
-### **15. `/sbin` (System Binaries)**
+### **14. `/sbin` (System Binaries)**
    - **Purpose**: Contains essential system binaries for system administration tasks, usually executed by the system administrator (root).
    - **Examples**: `ifconfig`, `reboot`, `shutdown`, `fsck`.
 
-### **16. `/srv` (Service Data)**
-   - **Purpose**: Stores data for services provided by the system, such as web or FTP servers.
+### **15. `/srv` (Service Data)**
+   - **Purpose**: Stores data for services provided by the system to user, such as web or FTP servers.Better organization than dumping everything into /var or /home.
    - **Examples**: `/srv/www/` (web server files), `/srv/ftp/` (FTP server files).
 
-### **17. `/sys` (System Information)**
+### **16. `/sys` (System Information)**
    - **Purpose**: A virtual filesystem that provides information about devices, kernel modules, and other system data.
    - **Examples**: `/sys/class/` (device classes), `/sys/block/` (block devices).
 
-### **18. `/tmp` (Temporary Files)**
+### **17. `/tmp` (Temporary Files)**
    - **Purpose**: Used to store temporary files created by programs or processes. Files in `/tmp` are often deleted on reboot.
    - **Examples**: Files created by applications during their execution or for temporary storage.
 
-### **19. `/usr` (User Utilities and Applications)**
+### **18. `/usr` (User Utilities and Applications)**
    - **Purpose**: Contains user-related programs and data, including software applications and documentation. It is one of the largest directories in a Linux system.
    - **Examples**:
      - `/usr/bin/` (user binary programs),
      - `/usr/lib/` (shared libraries),
      - `/usr/share/` (architecture-independent data files).
 
-### **20. `/var` (Variable Data)**
+### **19. `/var` (Variable Data)**
    - **Purpose**: Contains files that are expected to change frequently during system operation, such as logs, mail spools, and database files.
    - **Examples**:
      - `/var/log/` (system logs),
