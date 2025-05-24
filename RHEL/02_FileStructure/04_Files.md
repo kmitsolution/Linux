@@ -146,61 +146,7 @@ cp -rv /path/to/source_directory /path/to/destination_directory
 
 ---
 
-### 4. **Copying a Directory with Symbolic Links**
-
-If the directory contains symbolic links and you want to preserve them (rather than copying the files they point to), use the `-a` (archive) option:
-
-```
-cp -a /path/to/source_directory /path/to/destination_directory
-```
-
-- **Example**: Copy `myfolder` to `/home/user/backup/` while preserving symbolic links:
-
-  ```
-  cp -a /home/user/myfolder /home/user/backup/
-  ```
-
-- **Use case**: When you need to preserve symbolic links (symlinks) as they are during the copy.
-
----
-
-### 5. **Copying a Directory and Excluding Specific Files**
-
-To exclude specific files or patterns while copying a directory, use the `--exclude` option in combination with the `cp` command:
-
-```
-cp -r --exclude='*.log' /path/to/source_directory /path/to/destination_directory
-```
-
-- **Example**: Copy `myfolder` to `/home/user/backup/` but exclude all `.log` files:
-
-  ```
-  cp -r --exclude='*.log' /home/user/myfolder /home/user/backup/
-  ```
-
-- **Use case**: To exclude certain file types (like log files) from being copied.
-
----
-
-### 6. **Copying a Directory with Preservation of File Attributes**
-
-The `-a` option can also preserve file attributes (like timestamps, permissions, and ownership) when copying a directory:
-
-```
-cp -a /path/to/source_directory /path/to/destination_directory
-```
-
-- **Example**: Copy `myfolder` and preserve attributes such as permissions and timestamps:
-
-  ```
-  cp -a /home/user/myfolder /home/user/backup/
-  ```
-
-- **Use case**: Useful when copying directories that require exact preservation of file attributes, such as system files or configuration directories.
-
----
-
-### 7. **Copying Multiple Directories at Once**
+### 4. **Copying Multiple Directories at Once**
 
 To copy multiple directories, list them all in the `cp` command:
 
@@ -329,7 +275,7 @@ The `cat` command is used to **display the contents of a file**, **concatenate f
 > EOF
 ```
 In Red Hat Enterprise Linux (RHEL) or other Linux-based systems, the commands `more`, `less`, and `tac` are utilities that help users view and manipulate text content in different ways. Here’s a breakdown of each:
-
+```
 ### 1. **`more` Command**
 The `more` command is used to view the contents of a file one screen at a time. It's a simple pager program that allows scrolling through the content, but it doesn't have as many features as `less`.
 
