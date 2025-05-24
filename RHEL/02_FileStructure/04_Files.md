@@ -191,7 +191,7 @@ The `mv` command is used to **move** or **rename files and directories**.
 
 - **Move a directory recursively**:
   ```bash
-  mv -r /source/directory /destination/
+  mv  /source/directory /destination/
   ```
 
 - **Prompt before overwriting a file**:
