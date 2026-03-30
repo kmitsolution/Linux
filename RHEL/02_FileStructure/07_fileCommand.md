@@ -103,33 +103,13 @@ Here are some common file types the `file` command can identify:
    document.pdf: PDF document
    ```
 
-4. **`-z` (Decompress file)**: This option tells `file` to attempt to decompress compressed files (such as `.gz`, `.bz2`, etc.) before determining their type.
-
-   Example:
-   ```bash
-   file -z file.gz
-   ```
-
-   Output:
-   ```
-   file.gz: gzip compressed data, was "document.txt", last modified: Mon Dec 1 15:34:00 2024, max compression
-   ```
-
-5. **`-L` (Follow symbolic links)**: If the file is a symbolic link, this option tells `file` to follow the link and report the type of the target file.
+4. **`-L` (Follow symbolic links)**: If the file is a symbolic link, this option tells `file` to follow the link and report the type of the target file.
 
    Example:
    ```bash
    file -L symlink_file
    ```
 
-6. **`-e` (Examine specific test types)**: You can specify different tests to be performed. For instance, you can check the file’s encoding, compression, or format.
-
-   Example:
-   ```bash
-   file -e all filename
-   ```
-
-   This will attempt to run all available tests to determine the file type.
 
 ### **Examples of `file` Command Output:**
 
@@ -199,8 +179,7 @@ Here are some common file types the `file` command can identify:
 | `-b`   | Brief mode (output only the file type)            | `file -b myfile.txt`               |
 | `-i`   | Display MIME type of the file                     | `file -i myfile.txt`               |
 | `-f`   | Read file list from a file                        | `file -f files_list.txt`           |
-| `-z`   | Decompress files before determining type          | `file -z file.gz`                  |
 | `-L`   | Follow symbolic links                             | `file -L symlink`                  |
-| `-e`   | Examine specific tests for the file type          | `file -e all filename`             |
+
 
 The `file` command is an essential tool for any Linux user, providing useful information about file types and helping to make tasks like file processing, validation, and management more efficient.
