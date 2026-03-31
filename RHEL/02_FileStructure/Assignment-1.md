@@ -55,7 +55,7 @@ Here’s the **Linux Command Lab Assignment** with the answers at the bottom:
     - Compress the `file_list.txt` file using `gzip` and verify the creation of `file_list.txt.gz`. What is the file size change after compression?
 
 15. **Extract Gzip File:**
-    - Decompress `file_list.txt.gz` using `gunzip`. Verify the file has been restored to its original form and check the file contents using `cat`.
+    - Decompress `file_list.txt.gz` using `unzip`. Verify the file has been restored to its original form and check the file contents using `cat`.
 
 #### **Part 5: Cleanup and Final Verification**
 
