@@ -56,12 +56,12 @@ Hello
 ```
 - In this case, only the variable `myvar` is available in the environment, and the other environment variables are cleared because of the `-i` option.
 
-### 4. **`SLVL` Command**
+### 4. **`SHLVL` Command**
 The `SLVL` (Shell Level) command shows the current shell's level. It is a built-in variable that tracks how many nested shells you have. A value of `1` indicates that you're in the first (outermost) shell, while higher numbers indicate deeper nested shells.
 
 #### Example:
 ```bash
-echo $SLVL
+echo $SHLVL
 ```
 Output:
 ```
