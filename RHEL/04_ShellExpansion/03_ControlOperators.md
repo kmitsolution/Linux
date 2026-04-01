@@ -70,16 +70,6 @@ This is a very long command that spans across multiple lines.
 ```
 - The backslash tells the shell to treat the next line as a continuation of the current line.
 
-Another use of the backslash is to escape special characters (e.g., spaces, dollar signs) to prevent them from being interpreted by the shell.
-
-#### Example of escaping a space:
-```bash
-echo "Hello\ World"
-```
-Output:
-```
-Hello World
-```
 
 ### Summary of Operators:
 - **`;`**: Execute commands sequentially, regardless of success or failure.
@@ -87,4 +77,4 @@ Hello World
 - **`|`**: Pipe the output of one command to another command as input.
 - **`&&`**: Run the second command only if the first command succeeds.
 - **`||`**: Run the second command only if the first command fails.
-- **`\`**: Continue a command onto the next line or escape special characters.
+- **`\`**: Continue a command onto the next line
