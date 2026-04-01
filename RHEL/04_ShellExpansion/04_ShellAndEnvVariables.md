@@ -1,4 +1,4 @@
-In Linux and Unix-like systems, shell variables, environment variables, and profile files are used to configure the behavior of the shell and set the environment for programs. Here's an explanation of shell variables, how to set them permanently, the `env` command with the `-i` option, the `SLVL` command, and the `export` command with examples:
+In Linux and Unix-like systems, shell variables, environment variables, and profile files are used to configure the behavior of the shell and set the environment for programs. Here's an explanation of shell variables, how to set them permanently, the `env` command with the `-i` option, the `SHLVL` command, and the `export` command with examples:
 
 ### 1. **Shell Variables**
 A shell variable is a temporary variable used within a shell session. Shell variables are typically defined and used by the shell itself, and their scope is limited to the session in which they are defined.
