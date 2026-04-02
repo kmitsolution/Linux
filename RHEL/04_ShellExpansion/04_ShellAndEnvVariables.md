@@ -13,8 +13,9 @@ Output:
 Hello
 ```
 - In this example, `myvar` is a shell variable, and its value (`Hello`) is echoed to the terminal.
+#### env varaibles
 
-### 2. **Setting Shell Variables Permanently in Profile Files**
+### 2. **Setting Shell or env Variables Permanently in Profile Files**
 To set shell variables permanently, you need to add them to profile configuration files that are executed every time a new shell session starts. Common files used for this purpose are `~/.bashrc`, `~/.bash_profile`, `~/.profile` (for interactive shells), and `~/.bash_profile` (for login shells).
 
 #### Steps:
@@ -23,7 +24,7 @@ To set shell variables permanently, you need to add them to profile configuratio
    nano ~/.bashrc
    ```
 
-2. Add the variable definition at the end of the file:
+2. Add the variable definition at the end of the file- it will create the env variable:
    ```bash
    export MYVAR="Hello"
    ```
