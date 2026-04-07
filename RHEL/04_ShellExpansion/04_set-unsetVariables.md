@@ -362,10 +362,6 @@ set -euo pipefail
 * predictable
 * easier to debug
 
-Great question—this is exactly where many people (even experienced engineers) get tripped up.
-`set -e` looks simple, but its behavior has **non-obvious exceptions**.
-
-Let’s go through the most important **interview edge cases** 👇
 
 ---
 
