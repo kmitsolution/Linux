@@ -15,7 +15,7 @@
 
 The `set` command is used to:
 
-* Display all shell variables and functions
+* Display all shell variables,environment variables and shell functions
 * Set shell variables
 * Enable/disable shell options
 
