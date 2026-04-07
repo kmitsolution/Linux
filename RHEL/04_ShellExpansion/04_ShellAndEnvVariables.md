@@ -92,7 +92,7 @@ Now, the new directory (`/new/directory`) will be permanently added to your `PAT
 ### Summary:
 - **Shell Variables**: Temporary variables, used only within the current shell session.
 - **Permanent Variables**: To make shell variables permanent, define them in shell configuration files (e.g., `~/.bashrc`) and use `export` to ensure they are available to child processes.
-- **`env -i`**: Run commands with a clean environment, removing all inherited environment variables.
+- **`env `**: print all the environment variables.
 - **`SLVL`**: A built-in variable that shows the current shell nesting level.
 - **`export`**: Makes shell variables available to child processes, effectively turning them into environment variables.
 
