@@ -11,6 +11,16 @@ In Bash and other POSIX-compliant shells, the `$-` variable and the `set` comman
    ```bash
    set -x    # Enable tracing
    echo $-   # Outputs something like "himB" (depends on your environment), where 'x' indicates tracing is enabled
+
+| Flag | Meaning                                 |
+| ---- | --------------------------------------- |
+| `h`  | Hash commands (remembers command paths) |
+| `i`  | Interactive shell                       |
+| `m`  | Job control enabled                     |
+| `B`  | Brace expansion enabled (`{1..5}`)      |
+| `H`  | History expansion enabled (`!command`)  |
+| `s`  | Reading commands from standard input    |
+
    ```
 
 ### 2. **`set -u`**: 
