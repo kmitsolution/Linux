@@ -475,77 +475,7 @@ cat missing.txt | grep hello
 
 ---
 
-# ⚠️ 5. Subshells can hide failures
-
-```bash
-#!/bin/bash
-set -e
-
-( cat missing.txt )
-
-echo "Still running"
-```
-
-👉 In some cases, failures inside subshells don’t propagate as expected.
-
----
-
-# ⚠️ 6. Command substitution `$()` ignores `set -e`
-
-```bash
-#!/bin/bash
-set -e
-
-output=$(cat missing.txt)
-
-echo "Still running"
-```
-
-### Output:
-
-```
-cat: missing.txt: No such file
-Still running
-```
-
-👉 ❗ Why?
-
-* Failure happens in a **subshell**
-* `set -e` does not propagate
-
----
-
-## ✅ Safer alternative
-
-```bash
-set -euo pipefail
-
-output=$(cat missing.txt) || exit 1
-```
-
----
-
-# ⚠️ 7. Functions + `set -e` surprises
-
-```bash
-#!/bin/bash
-set -e
-
-myfunc() {
-  cat missing.txt
-  echo "Inside function"
-}
-
-myfunc
-
-echo "After function"
-```
-
-👉 Sometimes behaves unexpectedly depending on context (especially with conditionals).
-
----
-
-# ⚠️ 8. Negation (`!`) disables exit
+# ⚠️ 5. Negation (`!`) disables exit
 
 ```bash
 #!/bin/bash
@@ -562,7 +492,7 @@ echo "Still running"
 
 ---
 
-# ⚠️ 9. Loops may ignore failures
+# ⚠️ 6. Loops may ignore failures
 
 ```bash
 #!/bin/bash
@@ -600,8 +530,6 @@ echo "Still running"
 * `if`, `while`, `until`
 * `&&`, `||`
 * pipelines (unless `pipefail`)
-* subshells `(...)`
-* command substitution `$()`
 * negation `!`
 
 ---
