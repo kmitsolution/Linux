@@ -54,7 +54,7 @@ Still running
 #!/bin/bash
 set -euo pipefail
 
-cat missing.txt | grep hello
+cat missing.txt | grep hello | echo "grep command performed"
 
 echo "This will NOT run"
 ```
