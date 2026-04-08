@@ -441,7 +441,7 @@ echo "Script continues"
 #!/bin/bash
 set -e
 
-cat missing.txt | grep hello
+cat missing.txt | grep hello | echo "grep operation is performed"
 
 echo "Still running"
 ```
