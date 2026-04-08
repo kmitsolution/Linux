@@ -24,7 +24,7 @@ command1 | command2 | command3
 #!/bin/bash
 set -e
 
-cat missing.txt | grep hello
+cat missing.txt | grep hello | echo "grep command performed"
 
 echo "Still running"
 ```
@@ -33,8 +33,9 @@ echo "Still running"
 
 * `cat missing.txt` → ❌ fails
 * `grep hello` → runs (gets no input, exits normally)
+* ` echo command exexecuted successfully`
 
-👉 Final exit status = `grep` (success)
+👉 Final exit status =  (success)
 
 ### Output:
 
