@@ -607,7 +607,7 @@ set -o xtrace
 | `-e`  | `errexit`       | Exit on error                      |
 | `-u`  | `nounset`       | Error on unset variables           |
 | `-x`  | `xtrace`        | Debug mode                         |
-| —     | `pipefail`      | Fail if any pipeline command fails |
+
 
 ---
 
