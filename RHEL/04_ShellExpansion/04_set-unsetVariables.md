@@ -542,7 +542,7 @@ echo "Still running"
 
 ✔️ Best answer:
 
-> "`set -e` is useful but not fully reliable because it is ignored in many contexts like conditionals, pipelines, and command substitutions. For robust scripts, it should be combined with `set -o pipefail` and explicit error handling."
+> "`set -e` is useful but not fully reliable because it is ignored in many contexts like conditionals, pipelines, and negation. For robust scripts, it should be combined with `set -o pipefail` and explicit error handling."
 
 ---
 
