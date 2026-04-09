@@ -96,27 +96,8 @@ sort -t, -k2 file.csv
 ```
 This will sort based on the second column in a comma-separated file.
 
-#### 5. **Ignore Case While Sorting**
-To sort the content without considering the case (e.g., treat "a" and "A" as equal), use the `-f` option:
-```bash
-sort -f file.txt
-```
-For example, with `file.txt`:
-```
-Apple
-banana
-Zebra
-apple
-```
-The output will be:
-```
-Apple
-apple
-banana
-Zebra
-```
 
-#### 6. **Sorting by Month (Date)**
+#### 5. **Sorting by Month (Date)**
 If you have a file with dates and want to sort based on the date, use the `-M` option (sort by month name):
 ```bash
 sort -M file.txt
@@ -136,7 +117,7 @@ Apr 2020
 Dec 2022
 ```
 
-#### 7. **Unique Sort (Remove Duplicates)**
+#### 6. **Unique Sort (Remove Duplicates)**
 To remove duplicate lines while sorting, use the `-u` option:
 ```bash
 sort -u file.txt
@@ -156,7 +137,7 @@ banana
 cherry
 ```
 
-#### 8. **Sort by Specific Field with Delimiters**
+#### 7. **Sort by Specific Field with Delimiters**
 To specify a field to sort by when the file uses a specific delimiter, use the `-t` option to define the delimiter and `-k` for the field to sort by:
 ```bash
 sort -t, -k2 file.csv
@@ -174,7 +155,7 @@ John,25
 Doe,30
 ```
 
-#### 9. **Sort and Write to a File**
+#### 8. **Sort and Write to a File**
 You can redirect the sorted output to a new file using the redirection operator `>`:
 ```bash
 sort file.txt > sorted_file.txt
@@ -184,11 +165,10 @@ sort file.txt > sorted_file.txt
 - `-r`: Reverse the sort order (descending).
 - `-n`: Sort numerically.
 - `-k`: Specify the column (key) to sort by.
-- `-f`: Ignore case while sorting.
 - `-u`: Remove duplicate lines after sorting.
 - `-M`: Sort by month (useful for date formats).
 - `-t <delimiter>`: Specify a custom delimiter to split fields (useful for CSV files).
-- `-o <file>`: Write the output to a specified file.
+
 
 ### **Common Use Cases for `sort`:**
 
