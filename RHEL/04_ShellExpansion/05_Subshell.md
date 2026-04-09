@@ -1,4 +1,6 @@
-**Shell** commands involving variable assignments and command substitution in Bash (or other POSIX-compliant shells), specifically in the form of `$(...)` and backticks `` `...` ``. Let's break down the examples you've provided and clarify the differences between them.
+## Command Substitution and Sub Shell
+
+**Shell** commands involving variable assignments and command substitution in Bash (or other POSIX-compliant shells), specifically in the form of `$(...)` and backticks `` `...` ``. 
 
 ### Example 1: `echo $(var1=10; echo $var1)`
 
