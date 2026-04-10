@@ -15,7 +15,6 @@ wc [OPTION] [FILE...]
 - **`-l`**: Count the number of lines.
 - **`-w`**: Count the number of words.
 - **`-c`**: Count the number of bytes (characters).
-- **`-m`**: Count the number of characters (useful for multibyte characters).
 - **`-L`**: Display the length of the longest line in the file.
 
 ### **Basic Examples of Using `wc`:**
