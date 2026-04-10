@@ -107,6 +107,15 @@ awk -F'\t' '{ print $1 }' file.txt
 #### 6. **Using `NR` and `NF`:**
 - `NR`: Number of records (lines processed so far).
 - `NF`: Number of fields in the current record.
+- `OFS`: (Output Field Separator)
+
+📌 Example
+awk -F "," '{ OFS=" | "; print $1, $2 }' file.txt
+
+Output:
+
+Alice | 25
+Bob | 30
 
 **Example 1: Print Line Numbers and Fields:**
 ```bash
