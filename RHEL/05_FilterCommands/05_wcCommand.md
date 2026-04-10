@@ -87,14 +87,7 @@ Output:
 ```
 This counts **26 characters** in the file, including spaces.
 
-#### 5. **Count the Number of Characters (Multibyte)**
-For files containing multibyte characters (e.g., UTF-8 characters), use the `-m` option:
-```bash
-wc -m file.txt
-```
-This counts characters correctly, including multibyte ones.
-
-#### 6. **Find the Length of the Longest Line**
+#### 5. **Find the Length of the Longest Line**
 To display the length of the longest line in the file, use the `-L` option:
 ```bash
 wc -L file.txt
@@ -110,7 +103,7 @@ The longest line is "banana cherry," which has a length of **14 characters**, so
 14 file.txt
 ```
 
-#### 7. **Count Lines in Multiple Files**
+#### 6. **Count Lines in Multiple Files**
 To count the lines, words, and characters in multiple files, simply list the files:
 ```bash
 wc file1.txt file2.txt
@@ -131,7 +124,7 @@ Output:
 - `file2.txt`: 4 lines, 10 words, 42 characters
 - **Total**: 7 lines, 16 words, 75 characters
 
-#### 8. **Count Words from Standard Input**
+#### 7. **Count Words from Standard Input**
 You can also pipe input into `wc` using standard input (stdin).
 
 Example:
@@ -148,7 +141,7 @@ Output:
 
 You can also combine it with other commands in a pipeline to count lines or words from the output of another command.
 
-#### 9. **Count Words in Output of Another Command**
+#### 8. **Count Words in Output of Another Command**
 For example, to count the number of lines in the output of a command:
 ```bash
 ps aux | wc -l
@@ -160,7 +153,6 @@ This command counts the number of processes running on the system (by counting l
 - `-l`: Count lines.
 - `-w`: Count words.
 - `-c`: Count characters (bytes).
-- `-m`: Count characters (correct for multibyte characters).
 - `-L`: Print the length of the longest line.
 
 ### **Practical Use Cases:**
@@ -193,4 +185,4 @@ This command counts the number of processes running on the system (by counting l
 ### **Conclusion:**
 The `wc` command is a simple yet powerful utility for counting lines, words, characters, and other text statistics in a file or stream. It is commonly used in shell scripts and pipelines to analyze text data quickly and efficiently.
 
-Let me know if you need more details or examples!
+
