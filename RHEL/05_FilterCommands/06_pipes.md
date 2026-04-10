@@ -58,10 +58,10 @@ To view disk usage of directories in a human-readable format, you can pipe the o
 
 Example:
 ```bash
-du -h | sort -rh
+du -h | sort -rn
 ```
 - **`du -h`** shows disk usage in human-readable format (e.g., KB, MB, GB).
-- **`sort -rh`** sorts the output in reverse order and numerically (showing the largest directories first).
+- **`sort -rn`** sorts the output in reverse order and numerically (showing the largest directories first).
 
 This is useful for determining which directories are taking up the most disk space.
 
