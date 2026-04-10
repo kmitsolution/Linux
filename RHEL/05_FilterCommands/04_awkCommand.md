@@ -109,13 +109,57 @@ awk -F'\t' '{ print $1 }' file.txt
 - `NF`: Number of fields in the current record.
 - `OFS`: (Output Field Separator)
 
-📌 Example
+## 🔹 4. **OFS (Output Field Separator)**
+
+👉 Controls how output fields are separated
+
+### 📌 Example
+
+```bash
 awk -F "," '{ OFS=" | "; print $1, $2 }' file.txt
+```
 
-Output:
+**Output:**
 
+```
 Alice | 25
 Bob | 30
+```
+
+✅ Output separator changed from space → `|`
+
+---
+
+## 🔹 5. **RS (Record Separator)**
+
+👉 Defines how records (lines) are separated
+
+* Default: newline (`\n`)
+
+### 📌 Example
+
+**file.txt**
+
+```
+Alice 25;Bob 30;Charlie 22
+```
+
+```bash
+awk 'BEGIN { RS=";" } { print $1, $2 }' file.txt
+```
+
+**Output:**
+
+```
+Alice 25
+Bob 30
+Charlie 22
+```
+
+Now `;` is treated as line separator
+
+---
+
 
 **Example 1: Print Line Numbers and Fields:**
 ```bash
