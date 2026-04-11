@@ -88,7 +88,7 @@ Output might be something like:
 Here, both **`file.txt`** and **`hardlink.txt`** share the **same inode number**, meaning they reference the same underlying data.
 
 #### **Characteristics of Hard Links**:
-- Hard links cannot link to directories (except for the special `.` and `..` entries).
+- Hard links cannot link to directories. 
 - Hard links cannot span across different filesystems; the link must be within the same filesystem.
 - If you delete the original file, the data remains accessible via the hard link, as both the original file and the hard link point to the same inode.
 
