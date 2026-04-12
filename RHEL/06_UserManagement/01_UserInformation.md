@@ -1,4 +1,95 @@
 
+The fields like `pts/0`, `tty`, and `seat0` describe **how and where the user is logged in**. Here’s what each means:
+
+---
+
+## 🔹 `tty` (Teletype Terminal)
+
+* Refers to **physical or virtual console terminals**.
+* Example: `tty1`, `tty2`, etc.
+* These are accessed via:
+
+  * Direct keyboard + monitor (Ctrl + Alt + F1–F6)
+
+👉 So if you see:
+
+```
+user tty1
+```
+
+It means the user is logged in on a **local system console**.
+
+---
+
+## 🔹 `pts/0` (Pseudo Terminal Slave)
+
+* `pts` = **Pseudo Terminal**
+* Used for **remote or graphical sessions** like:
+
+  * SSH connections
+  * Terminal emulators (like GNOME Terminal, Konsole)
+
+👉 Example:
+
+```
+user pts/0
+```
+
+Means:
+
+* A **remote login (SSH)** OR
+* A terminal opened inside a GUI
+
+Each new terminal gets:
+
+* `pts/0`, `pts/1`, `pts/2`, etc.
+
+---
+
+## 🔹 `seat0`
+
+* Refers to a **seat in systemd/logind terminology**.
+* A "seat" = a set of hardware (keyboard, mouse, display).
+
+👉 `seat0` means:
+
+* The **main local seat** (default physical machine)
+* Typically your laptop or desktop’s primary session
+
+---
+
+## 🧠 Quick Summary
+
+| Term    | Meaning                        |
+| ------- | ------------------------------ |
+| `tty1`  | Physical/virtual console login |
+| `pts/0` | SSH or GUI terminal session    |
+| `seat0` | Default local hardware seat    |
+
+---
+
+## 🔍 Example Combined
+
+If you see:
+
+```
+user pts/0 ... (:0)
+```
+
+* Logged in via **GUI terminal or SSH**
+
+If you see:
+
+```
+user tty1 seat0
+```
+
+* Logged in directly on **local machine console**
+
+---
+
+
+
 1. **`whoami`**:
    - **Description**: Displays the username of the currently logged-in user.
    - **Example**: If you run `whoami` as the root user, it will output `root`.
