@@ -79,7 +79,7 @@ To allow a user to run all commands except for `useradd`, you can use the `!` op
 2. Add the following lines:
    ```bash
    username  ALL=(ALL) ALL
-   username  ALL=(ALL) NOPASSWD: !/usr/sbin/useradd
+   username ALL=(ALL) NOPASSWD: ALL, !/usr/sbin/useradd
    ```
 
    The first line gives `username` permission to run any command with `sudo`. The second line explicitly denies the ability to run the `/usr/sbin/useradd` command with `sudo`. If `username` tries to run the `useradd` command, they will get an error like:
