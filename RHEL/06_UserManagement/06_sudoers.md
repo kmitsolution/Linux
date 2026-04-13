@@ -30,6 +30,103 @@ To add a user and allow them to run commands with `sudo`, but still require them
    This allows `username` to run any command as any user, but will prompt them for a password.
 
 ---
+# Note:-
+
+In the **sudoers file**, this part:
+
+```bash
+ALL=(ALL) ALL
+```
+
+defines **who can run what as whom**. Let’s break it down clearly:
+
+---
+
+## 🔍 Meaning of `ALL=(ALL) ALL`
+
+### ✅ Structure:
+
+```
+<user>  <host> = (<run-as>) <commands>
+```
+
+So:
+
+### 👉 `ALL=(ALL) ALL` means:
+
+* **First `ALL` (host)**
+  → The rule applies on **all machines**
+  (mostly irrelevant unless using centralized sudo configs)
+
+* **`(ALL)` (run-as user)**
+  → You can run commands as **any user**
+  (e.g., `root`, `postgres`, `www-data`, etc.)
+
+* **Last `ALL` (commands)**
+  → You can run **any command**
+
+---
+
+## 💡 Simple interpretation
+
+👉 This line means:
+
+> “This user can run **any command**, as **any user**, on **any host**.”
+
+---
+
+## 🧠 Example
+
+If `manoj` has:
+
+```bash
+manoj ALL=(ALL) ALL
+```
+
+Then he can do:
+
+```bash
+sudo apt update
+sudo systemctl restart nginx
+sudo -u postgres psql
+sudo su -
+```
+
+👉 But **password is required** (unless `NOPASSWD` is added)
+
+---
+
+## 🔐 With NOPASSWD
+
+```bash
+manoj ALL=(ALL) NOPASSWD: ALL
+```
+
+👉 Means:
+
+* Full sudo access
+* ❗ No password prompt
+
+---
+
+## ⚠️ Common confusion
+
+| Rule                      | Meaning                          |
+| ------------------------- | -------------------------------- |
+| `ALL=(ALL) ALL`           | Full access **with password**    |
+| `ALL=(ALL) NOPASSWD: ALL` | Full access **without password** |
+| `NOPASSWD: !cmd`          | ❌ Does NOT allow anything        |
+
+---
+
+## ✅ Quick takeaway
+
+* `ALL=(ALL) ALL` = **complete sudo access**
+* It does **not disable password prompts**
+* It’s likely the rule currently affecting your user
+
+---
+
 
 #### **2. Add a User with `NOPASSWD` in the `sudoers` File**
 
