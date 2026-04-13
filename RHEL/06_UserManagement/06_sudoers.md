@@ -223,7 +223,7 @@ To grant a user permission to run **only specific commands** with `sudo`, you ca
 4. **Allow the user to run all commands except `useradd`**:
    ```bash
    username  ALL=(ALL) ALL
-   username  ALL=(ALL) NOPASSWD: !/usr/sbin/useradd
+   username ALL=(ALL) NOPASSWD: ALL, !/usr/sbin/useradd
    ```
 
 5. **Allow the user to run specific commands** (e.g., `ls` and `cat`):
