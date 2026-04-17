@@ -61,3 +61,14 @@ In Linux, file types are denoted by the first character in the file listing when
      ```
      chown user2 file1.txt
      ```
+2. **`chgrp` Command (Change Group)**
+   - Used to change the group ownership of a file or directory.
+   - Syntax:
+     ```
+     chgrp [OPTION] GROUP FILE(s)
+     ```
+   - Example:
+     To change the group ownership of `file1.txt` to `admin`:
+     ```
+     chgrp admin file1.txt
+     ```
