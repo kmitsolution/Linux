@@ -96,6 +96,3 @@ rm mypipe
 * Write → `echo "msg" > filename`
 * Used for IPC (Inter Process Communication)
 
----
-
-If you want, I can show a **two-way chat using named pipes** (very interesting practical example).
