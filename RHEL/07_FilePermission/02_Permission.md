@@ -1,16 +1,4 @@
 
-2. **`chgrp` Command (Change Group)**
-   - Used to change the group ownership of a file or directory.
-   - Syntax:
-     ```
-     chgrp [OPTION] GROUP FILE(s)
-     ```
-   - Example:
-     To change the group ownership of `file1.txt` to `admin`:
-     ```
-     chgrp admin file1.txt
-     ```
-
 ### **File Permissions**
 
 In Linux, file permissions determine who can read, write, or execute a file. The permissions are displayed when running `ls -l` and are divided into three groups: Owner, Group, and Others.
