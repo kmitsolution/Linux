@@ -149,7 +149,7 @@ This sets the shell for `username` to `/sbin/nologin`, preventing them from logg
 You can also manually edit the `/etc/passwd` file using `vipw` or `vigr` to change the user's shell to `/sbin/nologin`.
 
 ### **10. `vigr`**
-The `vigr` command is used to safely edit the `/etc/group` and `/etc/sudoers` files. It works similarly to `vipw`, but it is specifically for editing group files and the sudoers file, and it ensures that the file is locked during editing.
+The `vigr` command is used to safely edit the `/etc/group` and `/etc/gshadow` files. It works similarly to `vipw`, but it is specifically for editing group files and the gpasswd file, and it ensures that the file is locked during editing.
 
 **Syntax:**
 ```bash
@@ -158,10 +158,8 @@ sudo vigr
 
 **Example:**
 ```bash
-sudo vigr
+sudo vigr -s
 ```
-
-This opens the `/etc/sudoers` file (or `/etc/group` if specified) in `vi` for editing. It checks the syntax when you save and exit, preventing errors that could lock you out of sudo access.
 
 ---
 
@@ -197,7 +195,7 @@ This opens the `/etc/sudoers` file (or `/etc/group` if specified) in `vi` for ed
    ```bash
    sudo usermod -s /sbin/nologin alice
    ```
-10. **`vigr`**: Safely edits the `/etc/group` or `/etc/sudoers` files using `vi`.
+10. **`vigr`**: Safely edits the `/etc/group` or `/etc/gshadow` files using `vi`.
    ```bash
    sudo vigr
    ```
