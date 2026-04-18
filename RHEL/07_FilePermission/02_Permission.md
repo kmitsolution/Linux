@@ -87,6 +87,238 @@ You can use the `chmod` command to modify file permissions in either symbolic or
 
 ---
 
+
+---
+
+# 🧩 Case Study: Secure Project Directory Access Using chmod
+
+## 🎯 Scenario
+
+You’re a system admin managing a project directory:
+
+* Owner: `raman`
+* Another user: `manoj` (normal user, no sudo)
+* Goal: Control **who can enter the directory** and **who can execute a script**
+
+---
+
+# 🧱 Step 1: Create project directory
+
+```bash
+mkdir /home/raman/myproject
+```
+
+---
+
+# 👤 Step 2: Set ownership to raman
+
+```bash
+chown raman:raman /home/raman/myproject
+```
+
+---
+
+# 👥 Step 3: Create a normal user (manoj)
+
+```bash
+useradd manoj
+passwd manoj
+```
+
+👉 `manoj` is a regular user (not in sudo/wheel)
+
+---
+
+# 📄 Step 4: Create script file
+
+```bash
+touch /home/raman/myproject/backup.sh
+chown raman:raman /home/raman/myproject/backup.sh
+```
+
+---
+
+# ✍️ Step 5: Add content to script
+
+```bash
+vi /home/raman/myproject/backup.sh
+```
+
+Add:
+
+```bash
+echo "Started Backup"
+sleep 5
+echo "Backup is completed"
+```
+
+---
+
+# 🚫 Step 6: Remove execute permission on directory
+
+```bash
+chmod 666 /home/raman/myproject
+```
+
+👉 Permissions now:
+
+* No **execute (x)** → cannot enter directory
+
+---
+
+# 🔍 Step 7: Test as manoj
+
+```bash
+su - manoj
+cd /home/raman/myproject
+```
+
+❌ Output:
+
+```bash
+Permission denied
+```
+
+👉 **Reason:**
+Without `x` (execute) on a directory → user cannot `cd` into it
+
+---
+
+# ✅ Step 8: Allow directory access (execute for others)
+
+Switch back to root or raman:
+
+```bash
+chmod o+x /home/raman/myproject
+```
+
+---
+
+# 🔍 Step 9: Test again as manoj
+
+```bash
+su - manoj
+cd /home/raman/myproject
+```
+
+✅ Now it works
+
+👉 **Why?**
+
+* `x` on directory = permission to enter/traverse
+
+---
+
+# 🔐 Step 10: Restrict script execution
+
+Give execute only to owner & group:
+
+```bash
+chmod 750 /home/raman/myproject/backup.sh
+```
+
+👉 Permissions:
+
+* Owner (raman) → full
+* Group → read + execute
+* Others → no access
+
+---
+
+# 🚫 Step 11: Test execution as manoj (before group access)
+
+```bash
+su - manoj
+/home/raman/myproject/backup.sh
+```
+
+❌ Output:
+
+```bash
+Permission denied
+```
+
+👉 Because:
+
+* `manoj` is **not in raman group**
+* Others have **no execute permission**
+
+---
+
+# 👥 Step 12: Add manoj to raman group
+
+```bash
+usermod -aG raman manoj
+```
+
+---
+
+# 🔄 Step 13: Refresh session
+
+```bash
+su - manoj
+```
+
+---
+
+# ▶️ Step 14: Run script again
+
+```bash
+/home/raman/myproject/backup.sh
+```
+
+✅ Output:
+
+```bash
+Started Backup
+(wait 5 seconds)
+Backup is completed
+```
+
+---
+
+# 🧠 Key Learnings
+
+## 🔑 Directory permissions
+
+* `r` → list files
+* `x` → enter directory (**most important**)
+
+👉 Without `x`, even if `r` exists → ❌ cannot access
+
+---
+
+## 🔑 File permissions
+
+* `x` → required to run script
+* Controlled via:
+
+```bash
+chmod 750 backup.sh
+```
+
+---
+
+## 🔑 Group-based access control
+
+Instead of giving access to everyone:
+
+* Add users to group
+* Control via group permissions
+
+---
+
+## 🔑 Real-world use case
+
+This setup is commonly used for:
+
+* Dev teams sharing scripts
+* Controlled access environments
+* Secure automation systems
+
+---
+
+
 ### **Case Study: Managing File Permissions in a Linux System**
 
 In this case study, we will explore file permissions, ownership, and how to manage them using the `chown`, `chgrp`, and `chmod` commands. We will create files, change their permissions, modify ownership, and analyze the effects of these changes in a simulated environment.
