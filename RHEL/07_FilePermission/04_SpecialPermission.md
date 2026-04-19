@@ -438,11 +438,9 @@ chmod 4755 filename
 
 ## 🧪 Practical Example
 
-Great — that explains it. Without `chmod 4755`, setuid simply won’t activate. Let’s rebuild the **complete, clean case study** with a proper C example so you can reuse it for learning or teaching.
-
 ---
 
-# 🔐 Complete Case Study: setuid with C Program (Working Demo)
+# 🔐 Complete Case Study: setuid with C Program
 
 ## 🎯 Objective
 
