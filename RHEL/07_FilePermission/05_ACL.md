@@ -4,30 +4,6 @@ Access Control Lists (ACLs) in Linux provide a more granular level of permission
 
 ---
 
-### **How to Check if ACL is Supported by the File System**
-
-To check whether ACLs are supported by the file system, you can follow these steps:
-
-1. **Check `/etc/fstab`**:
-   - In the `/etc/fstab` file, if the file system is mounted with the `acl` option, ACL support is enabled. The `defaults` option typically includes ACL support by default on modern systems.
-   
-   Example line from `/etc/fstab`:
-   ```
-   /dev/sda1  /  ext4  defaults,acl  1  1
-   ```
-
-   - **`acl`** indicates that ACL is enabled for the file system.
-
-2. **Check the file system with `df -Th`**:
-   - Run `df -Th` to view the type of file systems mounted and whether they support ACL:
-   ```bash
-   df -Th
-   ```
-
-   - The output will show the file system types, and you can confirm if it supports ACL.
-
----
-
 ### **Working with ACLs**
 
 1. **Displaying ACL of a File:**
