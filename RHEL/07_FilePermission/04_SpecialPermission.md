@@ -370,98 +370,159 @@ This behavior ensures that all files created within the directory have the same 
 
 ### **6. `chmod u+s` and `chmod u+x` (setuid and add execute)**
 
-- **`chmod u+s`**: Sets the **setuid** (set user ID) bit on a file. When set, a user executing the file will execute it with the privileges of the file's owner (typically root).
-- **`chmod u+x`**: Adds the **execute** permission to the **user** (owner).
+## 🔐 What is **setuid (Set User ID)**?
 
-#### **Example 6: Setuid and Execute Permission**
+**setuid** is a special permission in Linux that allows a user to **execute a file with the privileges of the file owner**, instead of their own.
 
-1. **Set the `setuid` bit on a file**:
-   ```bash
-   chmod u+s /bin/ping
-   ```
+👉 In simple words:
 
-2. **Verify the permissions**:
-   ```bash
-   ls -l /bin/ping
-   ```
-
-   Output:
-   ```
-   -rwsr-xr-x 1 root root 52064 Dec  7 12:00 /bin/ping
-   ```
-
-   The **`s`** in the owner's execute permission indicates that the **setuid** bit is set. This means that users can execute the `ping` command with root privileges.
-
-3. **Add execute permission**:
-   ```bash
-   chmod u+x myfile
-   ```
+> When a file has setuid, whoever runs it gets **owner’s permissions (usually root)** during execution.
 
 ---
 
-### **7. How `/etc/shadow` is Updated (Even Without Permissions)**
+## 🧠 Why do we need setuid?
 
-The **`/etc/shadow`** file contains password hashes for users and can only be accessed by root or users with appropriate privileges. Even if it has restricted permissions, it can be updated using **root privileges** when modifying passwords or authentication settings (such as using `passwd` or other admin commands).
+Some tasks require higher privileges. Example:
 
-#### **Example**:
-```bash
-sudo passwd user1
-```
+* Changing passwords
+* System-level operations
 
-The **`/etc/shadow`** file will be updated even though it does not have readable permissions for regular users because **root** has the required permissions.
+A normal user cannot do these directly, so setuid allows controlled access.
 
 ---
 
-### **8. Executing `/etc/passwd` by All Users (Meaning of `s` Permission)**
+## 📌 Classic Example: `passwd` command
 
-The **`/etc/passwd`** file contains information about user accounts, and it has **read** permissions for all users. The **`s`** permission in the **owner**'s execute field means that when the file is executed, it will be executed with the permissions of the **file's owner**, typically **root**.
-
-#### **Example**: 
-You might see `ls -l` output like this:
 ```bash
--rwxr-xr-x 1 root root 1000 Dec  7 12:00 /etc/passwd
+ls -l /usr/bin/passwd
 ```
 
-The **`s`** permission in the owner's execute position indicates that when executed, it will run with root privileges.
+Output:
+
+```bash
+-rwsr-xr-x 1 root root ...
+```
+
+👉 Notice the **`s` instead of `x`**:
+
+* `rws` → setuid is enabled
+* Owner = root
+
+📍 This means:
+When any user runs `passwd`, it runs with **root privileges**.
+
+That’s how a normal user can change their password.
 
 ---
 
-### **9. Find Files with Special Permissions**
+## ⚙️ How to set setuid
 
-You can use the `find` command to locate files with specific permissions:
+### ✅ Using symbolic method
 
-#### **Find Directories with the Sticky Bit**:
 ```bash
-find / -type d -perm 2000 2>/dev/null
+chmod u+s filename
 ```
 
-#### **Find Files with `setuid` Permission**:
+### ✅ Using numeric method
+
 ```bash
-find /usr/bin -type f -perm -04000
+chmod 4755 filename
+```
+
+👉 Breakdown:
+
+* `4` → setuid
+* `755` → normal permissions
+
+---
+
+## 🧪 Practical Example
+
+### Step 1: Create a script
+
+```bash
+touch test.sh
+vi test.sh
+```
+
+Add:
+
+```bash
+#!/bin/bash
+whoami
 ```
 
 ---
 
-### **10. `chmod u+s`, `chmod u+x`, and `chmod u-s`**
+### Step 2: Give execute permission
 
-- **`chmod u+s`**: Set the **setuid** permission on a file.
-- **`chmod u+x`**: Add **execute** permission for the **owner**.
-- **`chmod u-s`**: Remove **setuid** permission from a file.
-
-#### **Example of `chmod u+s`**:
 ```bash
-chmod u+s /usr/bin/somefile
+chmod 755 test.sh
 ```
 
-#### **Example of `chmod u+x`**:
+---
+
+### Step 3: Change owner to root
+
 ```bash
-chmod u+x /usr/bin/somefile
+chown root:root test.sh
 ```
 
-#### **Example of `chmod u-s`**:
+---
+
+### Step 4: Apply setuid
+
 ```bash
-chmod u-s /usr/bin/somefile
+chmod 4755 test.sh
 ```
+
+---
+
+### Step 5: Run as normal user
+
+```bash
+./test.sh
+```
+
+👉 Output:
+
+```bash
+root
+```
+
+---
+
+## ⚠️ Important Warning
+
+* **setuid on shell scripts often doesn’t work** (disabled for security)
+* Works mainly with **compiled binaries (C programs)**
+
+---
+
+## 🔐 Security Risks
+
+* If misused → can lead to **privilege escalation**
+* Never give setuid to unknown or unsafe programs
+
+---
+
+## 🔍 Find all setuid files
+
+```bash
+find / -perm -4000 -type f 2>/dev/null
+```
+
+---
+
+## 🧠 Key Points Summary
+
+* `s` in permission = setuid
+* Runs with **owner privileges**
+* Common example: `/usr/bin/passwd`
+* Use carefully ⚠️
+
+---
+
 
 ### **Summary**
 
