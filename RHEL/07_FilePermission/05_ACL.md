@@ -118,7 +118,7 @@ Access Control Lists (ACLs) in Linux provide a more granular level of permission
    setfacl --no-mask -m u:raman:rw filename
    ```
 
-   This will grant **read** and **write** permissions to `nehra` without considering the mask. Normally, the mask would limit the permissions to the maximum allowed, but in this case, it is ignored.
+   This will grant **read** and **write** permissions to `raman` without considering the mask. Normally, the mask would limit the permissions to the maximum allowed, but in this case, it is ignored.
 
 2. **Check the File's ACL with `getfacl`:**
 
