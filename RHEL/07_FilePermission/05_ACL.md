@@ -107,6 +107,146 @@ Access Control Lists (ACLs) in Linux provide a more granular level of permission
    This command will clear all ACL entries on the specified file, effectively returning it to the default permission scheme.
 
 ---
+## 🔐 What is **mask** in ACL (Access Control List)?
+
+In ACL, the **mask** acts like a **maximum permission filter**.
+
+👉 Simple definition:
+
+> **Mask defines the maximum effective permissions for group and named users in ACL**
+
+---
+
+## 🧠 Why mask is needed?
+
+Even if you give full permissions to a user in ACL, the **mask can restrict it**.
+
+👉 So actual permission =
+**ACL permission ∩ Mask permission**
+
+---
+
+## 📌 Example
+
+### Step 1: Create file
+
+```bash
+touch file1
+```
+
+---
+
+### Step 2: Give ACL to user `manoj`
+
+```bash
+setfacl -m u:manoj:rwx file1
+```
+
+---
+
+### Step 3: Check ACL
+
+```bash
+getfacl file1
+```
+
+Output:
+
+```
+user::rw-
+user:manoj:rwx
+group::r--
+mask::rwx
+other::r--
+```
+
+👉 Here:
+
+* manoj = `rwx`
+* mask = `rwx`
+  ✔ Effective = `rwx`
+
+---
+
+## 🔒 Now restrict using mask
+
+```bash
+setfacl -m m::r-- file1
+```
+
+Check again:
+
+```
+user::rw-
+user:manoj:rwx   #effective:r--
+group::r--       #effective:r--
+mask::r--
+other::r--
+```
+
+👉 Even though:
+
+* manoj has `rwx`
+* Mask allows only `r--`
+
+✔ Final permission = **r-- only**
+
+---
+
+## 🔍 Key observations
+
+* Mask affects:
+
+  * Named users (like `manoj`)
+  * Group permissions
+
+* Mask does NOT affect:
+
+  * Owner (`user::`)
+  * Others (`other::`)
+
+---
+
+## 🧠 Important concept
+
+👉 Think of mask like a **ceiling (limit)**
+Even if you grant more, mask will **cap it**
+
+---
+
+## 📊 Quick Formula
+
+Effective permission:
+
+```
+Actual = ACL permission AND Mask
+```
+
+---
+
+## ⚙️ Set mask manually
+
+```bash
+setfacl -m m::rx file1
+```
+
+---
+
+## 🔍 Remove ACL (reset)
+
+```bash
+setfacl -b file1
+```
+
+---
+
+## 🎯 Real-world use case
+
+* You want to give `rwx` to multiple users
+* But restrict them temporarily → change mask instead of editing each user
+
+---
+
 
 ### **Working with Mask and No-Mask Calculations**
 
