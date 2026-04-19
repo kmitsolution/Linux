@@ -438,91 +438,175 @@ chmod 4755 filename
 
 ## 🧪 Practical Example
 
-### Step 1: Create a script
-
-```bash
-touch test.sh
-vi test.sh
-```
-
-Add:
-
-```bash
-#!/bin/bash
-whoami
-```
+Great — that explains it. Without `chmod 4755`, setuid simply won’t activate. Let’s rebuild the **complete, clean case study** with a proper C example so you can reuse it for learning or teaching.
 
 ---
 
-### Step 2: Give execute permission
+# 🔐 Complete Case Study: setuid with C Program (Working Demo)
 
-```bash
-chmod 755 test.sh
-```
+## 🎯 Objective
 
----
-
-### Step 3: Change owner to root
-
-```bash
-chown root:root test.sh
-```
+Demonstrate how **setuid allows a normal user to execute a program with root privileges**.
 
 ---
 
-### Step 4: Apply setuid
+# 🧱 Step 1: Create C program
 
 ```bash
-chmod 4755 test.sh
+vi test.c
+```
+
+Add this code:
+
+```c
+#include <stdio.h>
+#include <unistd.h>
+
+int main() {
+    printf("Real UID: %d\n", getuid());
+    printf("Effective UID: %d\n", geteuid());
+    return 0;
+}
 ```
 
 ---
 
-### Step 5: Run as normal user
+# ⚙️ Step 2: Compile the program
 
 ```bash
-./test.sh
-```
-
-👉 Output:
-
-```bash
-root
+gcc test.c -o test
 ```
 
 ---
 
-## ⚠️ Important Warning
-
-* **setuid on shell scripts often doesn’t work** (disabled for security)
-* Works mainly with **compiled binaries (C programs)**
-
----
-
-## 🔐 Security Risks
-
-* If misused → can lead to **privilege escalation**
-* Never give setuid to unknown or unsafe programs
-
----
-
-## 🔍 Find all setuid files
+# 🔍 Step 3: Check default permissions
 
 ```bash
-find / -perm -4000 -type f 2>/dev/null
+ls -l test
+```
+
+Example:
+
+```
+-rwxr-xr-x 1 raman raman ...
+```
+
+👉 Right now, it runs as the normal user.
+
+---
+
+# 🧪 Step 4: Run as normal user
+
+```bash
+./test
+```
+
+Output:
+
+```
+Real UID: 1001
+Effective UID: 1001
 ```
 
 ---
 
-## 🧠 Key Points Summary
+# 👑 Step 5: Change owner to root
 
-* `s` in permission = setuid
-* Runs with **owner privileges**
-* Common example: `/usr/bin/passwd`
-* Use carefully ⚠️
+```bash
+sudo chown root:root test
+```
 
 ---
 
+# 🔐 Step 6: Apply setuid permission
+
+```bash
+sudo chmod 4755 test
+```
+
+---
+
+# 🔍 Step 7: Verify permissions
+
+```bash
+ls -l test
+```
+
+Output:
+
+```
+-rwsr-xr-x 1 root root ...
+```
+
+👉 `s` = setuid enabled
+
+---
+
+# 🚀 Step 8: Run as normal user again
+
+```bash
+./test
+```
+
+Output:
+
+```
+Real UID: 1001
+Effective UID: 0
+```
+
+---
+
+# 🧠 Understanding the Output
+
+| Term          | Meaning                          |
+| ------------- | -------------------------------- |
+| Real UID      | Actual logged-in user            |
+| Effective UID | Privileges used during execution |
+
+👉 `0` = root → setuid is working
+
+---
+
+# ⚠️ Important Notes
+
+## ❌ setuid does NOT work on:
+
+* Shell scripts (`.sh`)
+* Filesystems with `nosuid`
+
+---
+
+---
+
+# 🔐 Real-world Example
+
+```bash
+ls -l /usr/bin/passwd
+```
+
+Output:
+
+```
+-rwsr-xr-x 1 root root ...
+```
+
+👉 That’s how users can change passwords securely
+
+---
+
+# 🧠 Key Takeaways
+
+* `chmod 4755` → enables setuid
+* Program runs with **owner privileges**
+* Works only with **compiled binaries**
+* Must have:
+
+  * correct ownership (root)
+  * correct permissions
+  * no `nosuid` restriction
+
+---
 
 ### **Summary**
 
