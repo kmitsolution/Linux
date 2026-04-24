@@ -3,6 +3,109 @@
 In Red Hat Enterprise Linux (RHEL), processes are managed by the operating system through a variety of commands and utilities. Understanding processes, their IDs, parent-child relationships, and how to manage or terminate them is essential for system administration. Below is a detailed explanation of key terms and concepts related to process management in RHEL.
 
 ---
+The `ps` command in **Red Hat Enterprise Linux (RHEL)** is used to **display information about currently running processes** on the system.
+
+---
+
+## 🔧 What `ps` does
+
+It shows a snapshot of processes, including:
+
+* Process ID (PID)
+* User running the process
+* CPU & memory usage
+* Terminal (TTY)
+* Command that started the process
+
+---
+
+## 🧾 Basic Syntax
+
+```bash
+ps [options]
+```
+
+---
+
+## 📌 Commonly Used `ps` Commands
+
+### 1. Show processes for current shell
+
+```bash
+ps
+```
+
+Displays processes associated with your current terminal session.
+
+---
+
+### 2. Show all processes (Linux style)
+
+```bash
+ps -e
+```
+
+or
+
+```bash
+ps -A
+```
+
+---
+
+### 3. Detailed full-format listing
+
+```bash
+ps -ef
+```
+
+* `-e` → all processes
+* `-f` → full details (UID, PID, PPID, start time, command)
+
+---
+
+### 4. User-friendly format
+
+```bash
+ps aux
+```
+
+* `a` → processes for all users
+* `u` → user-oriented format
+* `x` → includes processes without a terminal
+
+---
+
+### 5. Search for a specific process
+
+```bash
+ps -ef | grep nginx
+```
+
+---
+
+### 6. Tree view (process hierarchy)
+
+```bash
+ps -ef --forest
+```
+
+---
+
+## 📊 Example Output Explained
+
+```bash
+UID   PID  PPID  C STIME TTY   TIME CMD
+root    1     0  0 10:00 ?     00:00:02 systemd
+```
+
+* **UID** → user ID
+* **PID** → process ID
+* **PPID** → parent process ID
+* **CMD** → command name
+
+---
+
 
 ### **1. Process ID (PID)**
 
