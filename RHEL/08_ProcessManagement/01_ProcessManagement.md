@@ -62,21 +62,101 @@ ps -ef
 * `-e` → all processes
 * `-f` → full details (UID, PID, PPID, start time, command)
 
+That line is the **header row** from the `ps -ef` (or similar) command output. Each column tells you specific information about processes in Red Hat Enterprise Linux.
+
+Let’s break it down clearly:
+
 ---
 
-### 4. User-friendly format
+## 🧾 Column Explanation
 
-```bash
-ps aux
+```
+UID   PID   PPID   C   STIME   TTY   TIME   CMD
 ```
 
-* `a` → processes for all users
-* `u` → user-oriented format
-* `x` → includes processes without a terminal
+### 🔹 UID (User ID)
+
+* The **user who owns the process**
+* Example: `root`, `oracle`, `user1`
 
 ---
 
-### 5. Search for a specific process
+### 🔹 PID (Process ID)
+
+* Unique **identifier of the process**
+* Every running process has its own PID
+
+---
+
+### 🔹 PPID (Parent Process ID)
+
+* The **PID of the parent process**
+* Shows which process started this one
+
+---
+
+### 🔹 C (CPU usage)
+
+* Represents **CPU utilization (recent usage)**
+* Usually a small number (0–99)
+
+---
+
+### 🔹 STIME (Start Time)
+
+* When the process started
+* Example:
+
+  * `10:30` → started today
+  * `Apr21` → started earlier date
+
+---
+
+### 🔹 TTY (Terminal)
+
+* Terminal associated with the process
+* Examples:
+
+  * `pts/0` → SSH or terminal session
+  * `tty1` → physical console
+  * `?` → no terminal (background/daemon)
+
+---
+
+### 🔹 TIME (CPU Time Used)
+
+* Total CPU time consumed by the process
+* Format: `minutes:seconds`
+
+---
+
+### 🔹 CMD (Command)
+
+* The **actual command/program** that started the process
+* Example:
+
+  * `bash`
+  * `sshd`
+  * `httpd`
+
+---
+
+## 📌 Example
+
+```
+root   1   0   0   10:00   ?   00:00:02   systemd
+```
+
+👉 Meaning:
+
+* Run by **root**
+* PID = 1 (first process)
+* No terminal (`?`)
+* Started at 10:00
+* Command = `systemd`
+
+---
+### 4. Search for a specific process
 
 ```bash
 ps -ef | grep nginx
@@ -84,7 +164,7 @@ ps -ef | grep nginx
 
 ---
 
-### 6. Tree view (process hierarchy)
+### 5. Tree view (process hierarchy)
 
 ```bash
 ps -ef --forest
@@ -99,12 +179,136 @@ UID   PID  PPID  C STIME TTY   TIME CMD
 root    1     0  0 10:00 ?     00:00:02 systemd
 ```
 
-* **UID** → user ID
-* **PID** → process ID
-* **PPID** → parent process ID
-* **CMD** → command name
+### 6. User-friendly format
+
+```bash
+ps aux
+```
+
+* `a` → processes for all users
+* `u` → user-oriented format
+* `x` → includes processes without a terminal
+
+That header comes from commands like `ps aux` in Red Hat Enterprise Linux. It shows a **more detailed, user-friendly view of processes**.
+
+Let’s decode each column:
 
 ---
+
+## 🧾 Column Breakdown
+
+```bash id="r8l6l2"
+USER   PID  %CPU  %MEM   VSZ   RSS   TTY   STAT   START   TIME   COMMAND
+```
+
+---
+
+### 🔹 USER
+
+* The **owner of the process**
+* Example: `root`, `oracle`, `ec2-user`
+
+---
+
+### 🔹 PID (Process ID)
+
+* Unique ID of the process
+
+---
+
+### 🔹 %CPU
+
+* **CPU usage percentage**
+* Shows how much CPU the process is using right now
+
+---
+
+### 🔹 %MEM
+
+* **Memory usage percentage**
+* Percentage of RAM used by the process
+
+---
+
+### 🔹 VSZ (Virtual Size)
+
+* Total **virtual memory** used (in KB)
+* Includes all memory (used + swapped + allocated)
+
+---
+
+### 🔹 RSS (Resident Set Size)
+
+* Actual **physical RAM used** (in KB)
+* This is the real memory currently in RAM
+
+---
+
+### 🔹 TTY
+
+* Terminal associated with the process
+* `pts/0` → terminal
+* `?` → no terminal (background process)
+
+---
+
+### 🔹 STAT (Process State)
+
+Shows current status of the process:
+
+Common values:
+
+* `R` → Running
+* `S` → Sleeping
+* `D` → Uninterruptible sleep (I/O wait)
+* `T` → Stopped
+* `Z` → Zombie
+
+Extra flags:
+
+* `s` → session leader
+* `l` → multithreaded
+* `+` → foreground process
+
+Example: `Ss`, `R+`
+
+---
+
+### 🔹 START
+
+* Time or date when process started
+
+---
+
+### 🔹 TIME
+
+* Total **CPU time used** since start
+
+---
+
+### 🔹 COMMAND
+
+* Full command with arguments that started the process
+
+---
+
+## 📌 Example
+
+```bash id="2avij0"
+root   1023  0.0  1.2  225000  5000  ?  Ss  10:00  0:01  sshd
+```
+
+👉 Meaning:
+
+* Owned by `root`
+* Using 0.0% CPU, 1.2% memory
+* Running as a background service (`?`)
+* Status = sleeping (`Ss`)
+* Command = `sshd`
+
+---
+
+
 
 
 ### **1. Process ID (PID)**
