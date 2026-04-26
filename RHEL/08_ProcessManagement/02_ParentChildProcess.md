@@ -1,6 +1,6 @@
 ### **Understanding Process IDs and Parent Process IDs with Examples**
 
-In this guide, we will cover how to check the process IDs (`PID`) and Parent Process IDs (`PPID`) using the `echo $$`, `ps -C`, and `echo $PPID` commands, and explore what happens when you run new shells (`bash`, `ksh`, `zsh`), execute them, and check their process and parent process IDs.
+In this guide, we will cover how to check the process IDs (`PID`) and Parent Process IDs (`PPID`) using the `echo $$`, `ps -C`, and `echo $PPID` commands, and explore what happens when you run new shells , and check their process and parent process IDs.
 
 ---
 
