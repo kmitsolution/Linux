@@ -2,8 +2,6 @@ In Red Hat Enterprise Linux (RHEL) and other Linux-based systems, processes have
 
 ### 1. **Process Priority in Linux (RHEL)**
 
-There are two main ways that Linux handles process priority:
-
 #### **1.1 Nice Value**
 - The **nice value** is a user-level mechanism that affects the priority of a process. It influences how the Linux scheduler allocates CPU time.
 - **Range**: The nice value can range from **-20** (highest priority) to **+19** (lowest priority). The default nice value is **0**.
