@@ -11,10 +11,6 @@ There are two main ways that Linux handles process priority:
 - A process with a lower nice value (e.g., -20) will get more CPU time than a process with a higher nice value (e.g., +19).
 - The nice value can be adjusted for **non-real-time processes**.
 
-#### **1.2 Real-Time Priority**
-- Real-time processes are given the highest priority by the scheduler.
-- **Priority Range**: Real-time tasks can have priorities from **1 to 99**, with **1** being the lowest and **99** being the highest.
-- These processes are usually for time-sensitive tasks, such as audio or video streaming, system control, and more.
 
 ### 2. **Finding the Priority of a Process**
 
