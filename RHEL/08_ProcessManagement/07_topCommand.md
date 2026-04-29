@@ -46,10 +46,10 @@ MiB Swap:   2048.0 total,   2047.0 free,      1.0 used.   5623.6 avail Mem
   - `3 users`: The number of users currently logged in.
 
 - **Load Average**: The load average for the past 1, 5, and 15 minutes:
-  - `load average: 0.25, 0.40, 0.32`: Represents system load. Lower values indicate the system is under less stress.
+  - `load average: 0.25, 0.40, 0.32`: Represents system load for last 1min,5 min and 15min. Lower values indicate the system is under less stress.
 
 - **Tasks Information**:
-  - `Tasks: 253 total`: The total number of processes.
+  - `Tasks: 253 total`: tasks = processes + threads.
   - `1 running`: The number of processes currently running.
   - `252 sleeping`: Processes that are idle or waiting for resources.
   - `0 stopped`: Processes that have been stopped.
