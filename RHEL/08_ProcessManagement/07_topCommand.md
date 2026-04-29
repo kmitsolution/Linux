@@ -36,6 +36,8 @@ Tasks: 253 total,   1 running, 252 sleeping,   0 stopped,   0 zombie
 %Cpu(s):  8.3 us,  2.7 sy,  0.0 ni, 88.9 id,  0.0 wa,  0.0 hi,  0.1 si,  0.0 st
 MiB Mem :   7984.2 total,   1820.4 free,   2861.2 used,   4302.6 buff/cache
 MiB Swap:   2048.0 total,   2047.0 free,      1.0 used.   5623.6 avail Mem
+MiB = Mebibyte
+1 MiB = 1024 × 1024 bytes = 1,048,576 bytes
 ```
 
 **Explanation of the fields:**
