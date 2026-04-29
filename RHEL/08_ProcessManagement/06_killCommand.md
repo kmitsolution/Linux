@@ -11,6 +11,8 @@ The `jobs` command in Linux is used to display the processes that are running in
   Suppose you have started a process in the background:
   ```bash
   sleep 100 &
+  sleep 200 &
+  sleep 300 &
   ```
 
   You can check the status of this background process by running:
@@ -20,8 +22,126 @@ The `jobs` command in Linux is used to display the processes that are running in
 
   **Output**:
   ```
-  [1]+  1234  Running                 sleep 100 &
-  ```
+  jobs
+
+---
+
+## 🔹 Step 1: Start a few background jobs
+
+```bash
+sleep 100 &
+sleep 200 &
+sleep 300 &
+```
+
+Now check jobs:
+
+```bash
+jobs
+```
+
+You might see:
+
+```
+[1]   Running   sleep 100 &
+[2]-  Running   sleep 200 &
+[3]+  Running   sleep 300 &
+```
+
+👉 Meaning:
+
+* **[3]+** → current job (most recent)
+* **[2]-** → previous job
+* **[1]** → normal job
+
+---
+
+## 🔹 Step 2: Bring a job to foreground
+
+Run:
+
+```bash
+fg %2
+```
+
+Now job `[2]` comes to foreground and runs.
+
+After it finishes (or you stop it), check again:
+
+```bash
+jobs
+```
+
+You may see:
+
+```
+[1]-  Running   sleep 100 &
+[3]+  Running   sleep 300 &
+```
+
+👉 Notice:
+
+* `[3]` becomes **current (+)**
+* `[1]` becomes **previous (-)**
+
+---
+
+## 🔹 Step 3: Stop a job (Ctrl + Z)
+
+Bring job `[3]` to foreground:
+
+```bash
+fg %3
+```
+
+Then press **Ctrl + Z** → it stops.
+
+Now:
+
+```bash
+jobs
+```
+
+Example:
+
+```
+[1]-  Running   sleep 100 &
+[3]+  Stopped   sleep 300
+```
+
+👉 `[3]+` is still current, even though it's stopped
+
+---
+
+## 🔹 Step 4: Resume in background
+
+```bash
+bg %3
+```
+
+Now:
+
+```
+[1]-  Running   sleep 100 &
+[3]+  Running   sleep 300 &
+```
+
+---
+
+## 🔹 Key takeaways
+
+* `+` → default job (`fg`, `bg`)
+* `-` → previous job
+* These **change dynamically** based on what you last interacted with
+
+---
+
+## 🔹 Quick shortcuts
+
+* `fg` → same as `fg %+`
+* `fg %-` → bring previous job
+* `bg %+` → resume current job in background
+
 
 - **Explanation**: The output shows the job number (e.g., `[1]+`), the **PID** of the process (e.g., `1234`), the status (`Running`), and the command (`sleep 100 &`).
   - You can refer to background jobs by their job number (e.g., `%1` for job 1).
