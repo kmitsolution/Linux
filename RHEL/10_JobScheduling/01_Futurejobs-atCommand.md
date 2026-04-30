@@ -298,7 +298,7 @@ The `/var/spool/at` directory is where the system stores the **queued jobs** tha
 #### **Important Files in `/var/spool/at`**:
 
 - **Pending jobs**: The jobs are stored as files with filenames corresponding to job IDs.
-- **Job files**: These files contain the actual job (command) to be executed, along with scheduling information.
+
 
 You can view the files in the `/var/spool/at` directory using the `ls` command:
 
@@ -309,10 +309,9 @@ ls /var/spool/at
 To inspect the contents of a specific job file, you can open it using a text editor or the `cat` command:
 
 ```bash
-cat /var/spool/at/job_id
+cat /var/spool/at/<job filename>
 ```
 
-Each file in `/var/spool/at` represents a scheduled job. However, it’s worth noting that you should avoid manually editing these files unless you know what you are doing, as it may disrupt the job execution.
 
 ---
 
