@@ -36,7 +36,7 @@ To enable the cron service to start automatically at boot:
 systemctl enable crond.service
 ```
 
-#### **3. The `/etc/crontab` File**
+#### **3. The `/etc/crontab` File (System wide crontab jobs)**
 
 The `/etc/crontab` file is a system-wide crontab file that contains cron jobs for the entire system. It allows you to schedule tasks to be run by the system at specified intervals.
 
@@ -45,6 +45,9 @@ You can view the contents of the crontab file by running:
 ```bash
 cat /etc/crontab
 ```
+## Note:
+
+You can not see these jobs using crontab -e or crontab -l command
 
 The `/etc/crontab` file typically has the following format:
 
@@ -100,7 +103,7 @@ This means **the command will run at 5 minutes past every hour**, regardless of 
 
 So, it runs at **5 minutes past every hour** (e.g., 12:05, 1:05, 2:05, etc.).
 
-#### **6. Using the `crontab -e` Command**
+#### **6. Using the `crontab -e` (user sepcific) Command**
 
 To create or edit your personal user-specific crontab, use the command:
 
