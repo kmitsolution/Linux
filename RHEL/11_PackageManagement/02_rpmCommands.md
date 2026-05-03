@@ -69,14 +69,6 @@ Here is a detailed explanation of the commands and examples related to RPM packa
    ```
    This shows the contents of the RPM database directory.
 
-### 8. **`rpm2cpio`**  
-   The `rpm2cpio` command converts an RPM package into a `cpio` archive, which can then be extracted using the `cpio` command. This is useful when you want to extract the contents of an RPM without installing it.
-
-   Example:
-   ```bash
-   rpm2cpio openjdk-11.0.1-1.el9.aarch64.rpm | cpio -idmv
-   ```
-   This command converts the `openjdk-11.0.1-1.el9.aarch64.rpm` package to a `cpio` archive and extracts it into the current directory.
 
 ### **Installing OpenJDK Example**
 
