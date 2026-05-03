@@ -32,9 +32,10 @@ Here is a detailed explanation of the commands and examples related to RPM packa
    
    Example:
    ```bash
-   rpm -i nginx-1.27.3-1.1.aarch64.rpm
+    wget https://www.rpmfind.net/linux/epel/8/Everything/x86_64/Packages/h/htop-3.2.1-1.el8.x86_64.rpm
+    rpm -i nginx-1.27.3-1.1.aarch64.rpm
    ```
-   This will install the `nginx` RPM package.
+   This will install the `htop` RPM package.
 
 ### 5. **`rpm -ivh`**  
    The `-ivh` options are used together with the `rpm` command to install a package with additional output options:
