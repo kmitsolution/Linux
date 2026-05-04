@@ -1,5 +1,3 @@
----
-
 # 🧠 1. What is a Module in DNF?
 
 In DNF, a **module** is:
