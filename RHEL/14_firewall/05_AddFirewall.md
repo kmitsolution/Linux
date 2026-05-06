@@ -22,21 +22,74 @@ To **allow** HTTP (port 80) or ICMP (ping) traffic through the firewall, follow 
 
 #### 1.2 **Allow ICMP (ping) traffic through the firewall**
 
-- To allow **ICMP** (ping) traffic, you can add the following rule:
-  ```bash
-  sudo firewall-cmd --zone=public --add-service=icmp --permanent
-  ```
 
-  - `--add-service=icmp`: This allows all ICMP traffic, including ping.
+## What ICMP Actually Is
 
-- Reload the firewall to apply the changes:
-  ```bash
-  sudo firewall-cmd --reload
-  ```
+ICMP = Internet Control Message Protocol
 
-### 2. **Removing HTTP or ICMP from Firewalld**
+Used for:
 
-To **remove** HTTP or ICMP services from the firewall (i.e., block these types of traffic), you can use the `--remove-service` option.
+* `ping`
+* traceroute
+* network error messages
+
+It is a protocol, not a service.
+
+---
+
+## How firewalld Handles ICMP
+
+Firewalld manages ICMP separately using:
+
+```bash id="t50dxa"
+firewall-cmd --get-icmptypes
+```
+
+Example output:
+
+```text id="mbx1qo"
+echo-request
+echo-reply
+destination-unreachable
+time-exceeded
+```
+
+---
+
+## Allow or Block Ping
+
+### Block ping
+
+```bash id="5on1nk"
+sudo firewall-cmd --add-icmp-block=echo-request
+```
+
+Permanent:
+
+```bash id="ozg88g"
+sudo firewall-cmd --permanent --add-icmp-block=echo-request
+sudo firewall-cmd --reload
+```
+
+---
+
+### Remove block
+
+```bash id="rzc79v"
+sudo firewall-cmd --remove-icmp-block=echo-request
+```
+
+---
+
+## Check ICMP Blocks
+
+```bash id="5gk92p"
+firewall-cmd --list-icmp-blocks
+```
+
+---
+
+
 
 #### 2.1 **Remove HTTP (port 80) from the firewall**
 
@@ -50,16 +103,6 @@ To **remove** HTTP or ICMP services from the firewall (i.e., block these types o
   sudo firewall-cmd --reload
   ```
 
-#### 2.2 **Remove ICMP (ping) from the firewall**
-
-- To remove **ICMP** (ping), run:
-  ```bash
-  sudo firewall-cmd --zone=public --remove-service=icmp --permanent
-  ```
-
-- Reload the firewall to apply the changes:
-  ```bash
-  sudo firewall-cmd --reload
   ```
 
 ### 3. **Verifying Firewall Changes**
@@ -85,10 +128,6 @@ These commands will show you the current firewall configuration and confirm whet
   sudo firewall-cmd --reload
   ```
 
-- **Allow ICMP (ping)**:
-  ```bash
-  sudo firewall-cmd --zone=public --add-service=icmp --permanent
-  sudo firewall-cmd --reload
   ```
 
 - **Remove HTTP (port 80)**:
@@ -97,10 +136,5 @@ These commands will show you the current firewall configuration and confirm whet
   sudo firewall-cmd --reload
   ```
 
-- **Remove ICMP (ping)**:
-  ```bash
-  sudo firewall-cmd --zone=public --remove-service=icmp --permanent
-  sudo firewall-cmd --reload
-  ```
 
 This provides a basic and flexible approach to controlling access to your system's services and managing firewall rules.
